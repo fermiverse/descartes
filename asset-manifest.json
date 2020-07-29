@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/descartes/static/css/main.5f361e03.chunk.css",
+    "main.js": "/descartes/static/js/main.08261e49.chunk.js",
+    "main.js.map": "/descartes/static/js/main.08261e49.chunk.js.map",
+    "runtime-main.js": "/descartes/static/js/runtime-main.9f3e12f4.js",
+    "runtime-main.js.map": "/descartes/static/js/runtime-main.9f3e12f4.js.map",
+    "static/js/2.eb3ec3e7.chunk.js": "/descartes/static/js/2.eb3ec3e7.chunk.js",
+    "static/js/2.eb3ec3e7.chunk.js.map": "/descartes/static/js/2.eb3ec3e7.chunk.js.map",
+    "index.html": "/descartes/index.html",
+    "precache-manifest.77813df12bd2e01a5c069ebee4cffaa4.js": "/descartes/precache-manifest.77813df12bd2e01a5c069ebee4cffaa4.js",
+    "service-worker.js": "/descartes/service-worker.js",
+    "static/css/main.5f361e03.chunk.css.map": "/descartes/static/css/main.5f361e03.chunk.css.map",
+    "static/js/2.eb3ec3e7.chunk.js.LICENSE.txt": "/descartes/static/js/2.eb3ec3e7.chunk.js.LICENSE.txt",
+    "static/media/logo.svg": "/descartes/static/media/logo.5d5d9eef.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.9f3e12f4.js",
+    "static/js/2.eb3ec3e7.chunk.js",
+    "static/css/main.5f361e03.chunk.css",
+    "static/js/main.08261e49.chunk.js"
+  ]
+}
