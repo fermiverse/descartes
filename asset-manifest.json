@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/descartes/static/css/main.b19f1a08.chunk.css",
+    "main.css": "/descartes/static/css/main.8233a363.chunk.css",
     "main.js": "/descartes/static/js/main.8ff3c98c.chunk.js",
     "main.js.map": "/descartes/static/js/main.8ff3c98c.chunk.js.map",
     "runtime-main.js": "/descartes/static/js/runtime-main.9f3e12f4.js",
@@ -8,9 +8,9 @@
     "static/js/2.e8948e95.chunk.js": "/descartes/static/js/2.e8948e95.chunk.js",
     "static/js/2.e8948e95.chunk.js.map": "/descartes/static/js/2.e8948e95.chunk.js.map",
     "index.html": "/descartes/index.html",
-    "precache-manifest.9c9210d3c7da7fa9c9cb724a72c43b6e.js": "/descartes/precache-manifest.9c9210d3c7da7fa9c9cb724a72c43b6e.js",
+    "precache-manifest.8bfc69e7bc6e92f50ea18f466fbeb218.js": "/descartes/precache-manifest.8bfc69e7bc6e92f50ea18f466fbeb218.js",
     "service-worker.js": "/descartes/service-worker.js",
-    "static/css/main.b19f1a08.chunk.css.map": "/descartes/static/css/main.b19f1a08.chunk.css.map",
+    "static/css/main.8233a363.chunk.css.map": "/descartes/static/css/main.8233a363.chunk.css.map",
     "static/js/2.e8948e95.chunk.js.LICENSE.txt": "/descartes/static/js/2.e8948e95.chunk.js.LICENSE.txt",
     "static/media/close.svg": "/descartes/static/media/close.8b20cee7.svg",
     "static/media/earth.svg": "/descartes/static/media/earth.11093ee1.svg",
@@ -23,7 +23,7 @@
   "entrypoints": [
     "static/js/runtime-main.9f3e12f4.js",
     "static/js/2.e8948e95.chunk.js",
-    "static/css/main.b19f1a08.chunk.css",
+    "static/css/main.8233a363.chunk.css",
     "static/js/main.8ff3c98c.chunk.js"
   ]
 }
