@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "20490fd051c16281401413d6880b45e8",
+    "revision": "fabc9477754e50a3a9fada56f33b5c87",
     "url": "/descartes/index.html"
   },
   {
-    "revision": "e344d5e49ed15f1fb107",
-    "url": "/descartes/static/css/main.f34fc1cc.chunk.css"
+    "revision": "0eca2fb54f2041ee093b",
+    "url": "/descartes/static/css/main.a2fe671e.chunk.css"
   },
   {
     "revision": "d6b252006443e30cba7c",
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/descartes/static/js/2.3a5cf6ef.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "e344d5e49ed15f1fb107",
-    "url": "/descartes/static/js/main.e29a3f3e.chunk.js"
+    "revision": "0eca2fb54f2041ee093b",
+    "url": "/descartes/static/js/main.30e30e32.chunk.js"
   },
   {
     "revision": "715bf0adcee96bbde5b4",
@@ -48,8 +48,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/descartes/static/media/marker1.3f22cecd.svg"
   },
   {
-    "revision": "1c29898cc0c43bb9dc1003a11ff6f8b6",
-    "url": "/descartes/static/media/marker2.1c29898c.svg"
+    "revision": "768ee98ffce687e8be0a4d0f14d3097e",
+    "url": "/descartes/static/media/marker2.768ee98f.svg"
   },
   {
     "revision": "4aaf92d0ed86d1b1165581081977af0d",
