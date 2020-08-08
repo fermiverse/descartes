@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "76d41d66187674c9cf110c744edce860",
+    "revision": "afd7fe767d1e1916c9afa3a4149f0f9f",
     "url": "/descartes/index.html"
   },
   {
-    "revision": "08637934522c91b06134",
-    "url": "/descartes/static/css/main.8233a363.chunk.css"
+    "revision": "7e358fb06942cdccd463",
+    "url": "/descartes/static/css/main.af92a3fe.chunk.css"
   },
   {
-    "revision": "7a3f6da87adbe2fa607b",
-    "url": "/descartes/static/js/2.e8948e95.chunk.js"
+    "revision": "58d6d7d0e8961a857439",
+    "url": "/descartes/static/js/2.756a7b33.chunk.js"
   },
   {
     "revision": "0fb0e672f1308cb5b7677cdb93fc42ab",
-    "url": "/descartes/static/js/2.e8948e95.chunk.js.LICENSE.txt"
+    "url": "/descartes/static/js/2.756a7b33.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "08637934522c91b06134",
-    "url": "/descartes/static/js/main.8ff3c98c.chunk.js"
+    "revision": "7e358fb06942cdccd463",
+    "url": "/descartes/static/js/main.f9c8ed8d.chunk.js"
   },
   {
     "revision": "715bf0adcee96bbde5b4",
@@ -26,6 +26,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "8b20cee781fd412c2a4a817be4b22d7d",
     "url": "/descartes/static/media/close.8b20cee7.svg"
+  },
+  {
+    "revision": "8c90f56ff0c66df569afb6150c566bcc",
+    "url": "/descartes/static/media/descartes_big.8c90f56f.svg"
   },
   {
     "revision": "11093ee16c26a61acb6c3c1637e50ec7",
@@ -44,8 +48,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/descartes/static/media/marker1.3f22cecd.svg"
   },
   {
-    "revision": "5ce1109800b0fe6c5fd8053eee0b525b",
-    "url": "/descartes/static/media/marker2.5ce11098.svg"
+    "revision": "1c29898cc0c43bb9dc1003a11ff6f8b6",
+    "url": "/descartes/static/media/marker2.1c29898c.svg"
+  },
+  {
+    "revision": "ad839e81cbb01e3c1a3f46e98d247029",
+    "url": "/descartes/static/media/plogo.ad839e81.svg"
   },
   {
     "revision": "07ddfa3b4047c1d010cb06fb4bed7941",
