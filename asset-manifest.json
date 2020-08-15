@@ -1,22 +1,25 @@
 {
   "files": {
-    "main.css": "/descartes/static/css/main.6f34a05b.chunk.css",
-    "main.js": "/descartes/static/js/main.9344d67d.chunk.js",
-    "main.js.map": "/descartes/static/js/main.9344d67d.chunk.js.map",
+    "main.css": "/descartes/static/css/main.019f0460.chunk.css",
+    "main.js": "/descartes/static/js/main.7318b52f.chunk.js",
+    "main.js.map": "/descartes/static/js/main.7318b52f.chunk.js.map",
     "runtime-main.js": "/descartes/static/js/runtime-main.9f3e12f4.js",
     "runtime-main.js.map": "/descartes/static/js/runtime-main.9f3e12f4.js.map",
-    "static/js/2.3a5cf6ef.chunk.js": "/descartes/static/js/2.3a5cf6ef.chunk.js",
-    "static/js/2.3a5cf6ef.chunk.js.map": "/descartes/static/js/2.3a5cf6ef.chunk.js.map",
+    "static/js/2.a1cdb1ae.chunk.js": "/descartes/static/js/2.a1cdb1ae.chunk.js",
+    "static/js/2.a1cdb1ae.chunk.js.map": "/descartes/static/js/2.a1cdb1ae.chunk.js.map",
     "index.html": "/descartes/index.html",
-    "precache-manifest.d47f752d707cd4e4b2a9c0c3c5b240f3.js": "/descartes/precache-manifest.d47f752d707cd4e4b2a9c0c3c5b240f3.js",
+    "precache-manifest.063fb4f05dcbde5a4afa371568700797.js": "/descartes/precache-manifest.063fb4f05dcbde5a4afa371568700797.js",
     "service-worker.js": "/descartes/service-worker.js",
-    "static/css/main.6f34a05b.chunk.css.map": "/descartes/static/css/main.6f34a05b.chunk.css.map",
-    "static/js/2.3a5cf6ef.chunk.js.LICENSE.txt": "/descartes/static/js/2.3a5cf6ef.chunk.js.LICENSE.txt",
+    "static/css/main.019f0460.chunk.css.map": "/descartes/static/css/main.019f0460.chunk.css.map",
+    "static/js/2.a1cdb1ae.chunk.js.LICENSE.txt": "/descartes/static/js/2.a1cdb1ae.chunk.js.LICENSE.txt",
     "static/media/close.svg": "/descartes/static/media/close.8b20cee7.svg",
     "static/media/descartes_big.svg": "/descartes/static/media/descartes_big.8c90f56f.svg",
     "static/media/earth.svg": "/descartes/static/media/earth.11093ee1.svg",
     "static/media/graph.svg": "/descartes/static/media/graph.cc27234c.svg",
+    "static/media/indicator1.svg": "/descartes/static/media/indicator1.0b77f2e2.svg",
+    "static/media/indicator2.svg": "/descartes/static/media/indicator2.b9d5e1ea.svg",
     "static/media/information.svg": "/descartes/static/media/information.8bbb0af1.svg",
+    "static/media/layers.svg": "/descartes/static/media/layers.2ddc5da1.svg",
     "static/media/marker1.svg": "/descartes/static/media/marker1.3f22cecd.svg",
     "static/media/marker2.svg": "/descartes/static/media/marker2.768ee98f.svg",
     "static/media/menu.svg": "/descartes/static/media/menu.4aaf92d0.svg",
@@ -25,8 +28,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.9f3e12f4.js",
-    "static/js/2.3a5cf6ef.chunk.js",
-    "static/css/main.6f34a05b.chunk.css",
-    "static/js/main.9344d67d.chunk.js"
+    "static/js/2.a1cdb1ae.chunk.js",
+    "static/css/main.019f0460.chunk.css",
+    "static/js/main.7318b52f.chunk.js"
   ]
 }
