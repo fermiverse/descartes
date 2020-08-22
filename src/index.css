@@ -5,9 +5,517 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+::-webkit-scrollbar {
+  width: 8px;
+  float: right;
+}
+
+::-webkit-scrollbar-track {
+  background-color: rgba(32, 32, 32, 0.1);
+  border-radius: 4px;
+  border: 1px solid white;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgb(92, 92, 92);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-button {
+  display: none;
+}
+
+img {
+  pointer-events: none;
+}
+
+/*.app {
+  display: flex;
+  position: relative;
+  flex-wrap: nowrap;
+  width: 100vw;
+  height: 100vh;
+}*/
+
+/*#sidebar {
+  width: 384px;
+  min-width: 384px;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgb(3, 11, 26);
+  overflow-y: auto;
+  z-index: 1000;
+}*/
+
+#sidebar h1 {
+  margin-left: 20px;
+  color: white;
+}
+
+input {
+  margin: 5px;
+  margin-left: 0;
+  margin-right: 8px;
+  padding-left: 3px;
+  width: 40%;
+}
+
+.form-container {
+  border-radius: 15px;
+  background-color: rgb(226, 226, 226);
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.4);
+  width: 309px;
+  padding: 10px;
+  font-size: 14px;
+  margin-left: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.form-container p {
+  margin: 0;
+}
+
+.form-container input {
+  width: 135px;
+}
+
+#dlist::-webkit-scrollbar {
+  width: 8px;
+  float: right;
+}
+
+#dlist::-webkit-scrollbar-track {
+  background-color: rgb(255, 255, 255);
+  border-radius: 4px;
+  border: 1px solid rgb(100, 100, 100);
+}
+
+#dlist::-webkit-scrollbar-thumb {
+  background-color: rgb(54, 54, 54);
+  border-radius: 4px;
+}
+
+#dlist::-webkit-scrollbar-button {
+  display: none;
+}
+
+#dReset {
+  background-color: red;
+  margin-left: 10px;
+}
+
+#dReset:hover {
+  background-color: rgb(194, 0, 0);
+}
+
+.rounded {
+  cursor: pointer;
+  border: none;
+  margin-top: 10px;
+  border-radius: 14px;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  color: white;
+  background-color: rgb(26, 206, 26);
+  outline: none;
+}
+
+.rounded:hover {
+  background-color: rgb(20, 167, 20);
+}
+
+.blank {
+  border: none;
+  outline: none;
+  background: none;
+  cursor: pointer;
+  padding-top: 3px;
+  padding-bottom: 0;
+}
+
+.collapse {
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  padding: 6px;
+  padding-top: 8px;
+  color: rgb(26, 21, 21);
+  background-color: rgb(226, 226, 226);
+  outline: none;
+  margin-left: 20px;
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.4);
+  width: 28px;
+  height: 28px;
+}
+
+#snap {
+  background-color: rgb(25, 167, 211);
+  margin-left: 10px;
+}
+
+#snap:hover {
+  background-color: rgb(14, 136, 173);
+}
+
+#pop {
+  background-color: orange;
+  margin-left: 10px;
+}
+
+#pop:hover {
+  background-color: darkorange;
+}
+
+#reset {
+  background-color: red;
+  position: absolute;
+  right: 15px;
+  bottom: 20px;
+}
+
+#reset:hover {
+  background-color: rgb(194, 0, 0);
+}
+
+#toggle {
+  position: absolute;
+  right: 15px;
+  bottom: 60px;
+  z-index: 100;
+  padding: 0;
+}
+
+#GJ {
+  position: absolute;
+  right: 15px;
+  bottom: 105px;
+  z-index: 100;
+  padding: 0;
+}
+
+#raw {
+  color: rgb(23, 24, 24);
+  background-color: rgb(246, 246, 246);
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 15px;
+  border-radius: 10px;
+  border: none;
+  height: 30vh;
+  width: 278px;
+  outline: none;
+  overflow-y: auto;
+}
+
+#raw::-webkit-scrollbar {
+  width: 8px;
+  float: right;
+}
+
+#raw::-webkit-scrollbar-track {
+  background-color: rgba(32, 32, 32, 0.1);
+  border-radius: 4px;
+  border: 1px solid rgb(100, 100, 100);
+}
+
+#raw::-webkit-scrollbar-thumb {
+  background-color: rgb(54, 54, 54);
+  border-radius: 4px;
+}
+
+#raw::-webkit-scrollbar-button {
+  display: none;
+}
+
+.output {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#output {
+  min-width: 200px;
+  max-width: 300px;
+  max-height: 500px;
+}
+
+#close {
+  position: absolute;
+  right: 0;
+  padding: 0;
+}
+
+#output-coords {
+  margin-top: 30px; 
+  margin-bottom: 10px; 
+  color: blue; 
+  overflow-y: auto; 
+  max-height: 200px;
+}
+
+#output-coords::-webkit-scrollbar {
+  width: 8px;
+  float: right;
+}
+
+#output-coords::-webkit-scrollbar-track {
+  background-color: rgba(32, 32, 32, 0.1);
+  border-radius: 4px;
+  border: 1px solid rgb(100, 100, 100);
+}
+
+#output-coords::-webkit-scrollbar-thumb {
+  background-color: rgb(54, 54, 54);
+  border-radius: 4px;
+}
+
+#output-coords::-webkit-scrollbar-button {
+  display: none;
+}
+
+.line {
+  background-color: rgb(226, 226, 226);
+  padding-top: 4px;
+  outline: none;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  position: absolute;
+  right: 15px;
+  top: 180px;
+  height: 28px;
+}
+
+.top-drawer {
+  position: absolute;
+  left: 15px;
+  top: 15px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.4);
+  padding: 15px;
+}
+
+.top-drawer p {
+  margin: 0;
+}
+
+#drop {
+  transform: translate(0, 60px);
+}
+
+/*.info-pop {
+  width: 450px;
+}*/
+
+.popup-content {
+  padding-left: 3px;
+  padding-right: 12px;
+  padding-bottom: 3px;
+  padding-top: 6px;
+}
+
+.popup-content p {
+  margin: 0;
+  color: black;
+}
+
+.landing {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  min-height: 100vh;
+  background-color: rgb(68, 13, 196);
+  z-index: 2000;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  overflow-x: hidden;
+}
+
+.view {
+  width: 400px;
+  margin: 50px;
+}
+
+@media only screen and (max-width: 768px) {
+  #hero {
+    transform: translate(0, -100px);
+  }
+}
+
+#intro {
+  color: white;
+  text-align: center;
+  padding-top: 65px;
+}
+
+#intro h1 {
+  font-family: "Comfortaa";
+  font-size: 60px;
+  animation: text 0.6s linear 0s 1;
+}
+
+@keyframes text {
+  from {
+    opacity: 0;
+    transform: translate(0, 100px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0, 0px);
+  }
+}
+
+#intro h2 {
+  color: rgb(68, 13, 196);
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+  animation: text2 0.6s linear 0.6s 1;
+  animation-fill-mode: forwards;
+  margin-top: 40px;
+}
+
+@keyframes text2 {
+  from {
+    opacity: 0;
+    transform: translate(0, 100px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0, 0px);
+    color: white;
+  }
+}
+
+#intro a {
+  color: rgb(68, 13, 196);
+  text-decoration: none;
+  animation: text3 0.6s linear 0.6s 1;
+  animation-fill-mode: forwards;
+}
+
+@keyframes text3 {
+  from {
+    opacity: 0;
+    transform: translate(0, 100px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0, 0px);
+    color: white;
+  }
+}
+
+.social {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 107px;
+  animation: social 0.6s linear 1.5s 1;
+  opacity: 0;
+  animation-fill-mode: forwards;
+}
+
+.social a {
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+@keyframes social {
+  from {
+    opacity: 0;
+    transform: translate(0, 100px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0, 0px);
+  }
+}
+
+#hero {
+  animation: description 2s linear 2.2s 1;
+  animation-fill-mode: forwards;
+  opacity: 0;
+}
+
+@keyframes description {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+#hero img {
+  margin: 0;
+}
+
+#btn-grp {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+#proceed {
+  background-color: rgb(54, 11, 156);
+  font-size: 13px;
+  cursor: pointer;
+  border: none;
+  border-radius: 30px;
+  padding-left: 80px;
+  padding-right: 80px;
+  padding-top: 10px;
+  padding-bottom: 12px;
+  color: white;
+  outline: none;
+  text-transform: uppercase;
+  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.9);
+  font-family: 'Poppins';
+  letter-spacing: 2px;
+}
+
+#proceed:active {
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+}
+
+#hero input {
+  -webkit-appearance: none;
+  background-color: rgb(54, 11, 156);
+	border-radius: 2px;
+	display: inline-block;
+  position: relative;
+  width: 12px;
+  height: 12px;
+  border: none;
+  outline: none;
+  box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.9);
+  margin-right: 15px;
+}
+
+#hero input:checked {
+	background-color: #fafafa;
+}
+
+label {
+  font-size: 14px;
 }
