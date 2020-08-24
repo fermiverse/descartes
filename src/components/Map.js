@@ -231,7 +231,7 @@ const Map = ({points, setPoints, lines, setLines, areas, setAreas, showSidebar})
                     <Measures entities={areas} type={"areas"}/>
                 ) : (null)}
 
-                <button className="blank" id="measure" title={showMeasures ? "Measurements on" : "Measurements off"} onClick={() => {
+                <button className="blank" id="measure" title={showMeasures ? "Hide measures" : "Show measures"} onClick={() => {
                     if (lines.length || areas.length) toggleShowMeasures(!showMeasures)
                     else toggleShowMeasures(false)
                     }}>

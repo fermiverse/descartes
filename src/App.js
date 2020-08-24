@@ -35,7 +35,7 @@ const App = () => {
       areas: areas
     };
     localStorage.setItem("sessionData", JSON.stringify(item));
-    //sessionStorage.setItem("showLanding", JSON.stringify(showLanding));
+    sessionStorage.setItem("showLanding", JSON.stringify(showLanding));
   }
 
   useEffect(() => {
@@ -121,9 +121,15 @@ const App = () => {
   const [areas, setAreas] = useState((init.areas && init.areas.length) ? init.areas : [defaultArea]);
   const [showOutput, toggleShowOutput] = useState(false);
   const [showSidebar, toggleShowSidebar] = useState(true);
+  const landing = JSON.parse(localStorage.getItem("showLanding")) === false && JSON.parse(localStorage.getItem("showLanding")) !== null ? false
+  : (JSON.parse(sessionStorage.getItem("showLanding")) === null || JSON.parse(sessionStorage.getItem("showLanding")) === true) ? true : false;
+  const [showLanding, toggleShowLanding] = useState(landing);
 
   return (
     <div className="App" style={style}>
+      {showLanding ? (
+        <Landing showLanding={showLanding} toggleShowLanding={toggleShowLanding} />
+      ) : (null)}
       {!showSidebar ? (
         <div id="title">
           <div>

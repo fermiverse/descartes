@@ -11,7 +11,7 @@ const Landing = ({showLanding, toggleShowLanding}) => {
     return ( 
         <div className="landing">
             <div className="view" id="intro">
-                <h1>descartes v1.2</h1>
+                <h1>descartes v1.3</h1>
                 <h2>A simple map-marking tool, developed by the team at <strong><a href="https://www.nawgati.com/">Nawgati</a></strong></h2>
                 <div className="social">
                     <a href="https://www.nawgati.com/" title="Nawgati"><img src={Nawgati} alt="Nawgati" height="20px"></img></a>
