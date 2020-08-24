@@ -16,17 +16,9 @@ const App = () => {
     height: "100%"
   };
   
-  /*Station schema:
-    Points: [{
-      id: uuid,
-      type: "Point",
-      coordinates: [lng, lat]},],
-    Lines: [{
-      id: uuid,
-      type: "LineString",
-      coordinates: [[lng, lat], ]},]*/ 
-  
   const init = JSON.parse(localStorage.getItem("sessionData"));
+  
+  /*
   const [origin, setOrigin] = useState(init && init["origin"] && init["origin"].length ? init["origin"] : [77.516233, 28.494164]);
   const [destinations, setDestinations] = useState(init ? init["destinations"] : []);
   const [showOutput, toggleShowOutput] = useState(false);
@@ -34,20 +26,23 @@ const App = () => {
   : (JSON.parse(sessionStorage.getItem("showLanding")) === null || JSON.parse(sessionStorage.getItem("showLanding")) === true) ? true : false;
   const [showLanding, toggleShowLanding] = useState(landing);
   const [showSidebar, toggleShowSidebar] = useState(true);
+  */
 
   const onUnloadSave = () => {
     const item = {
-      origin: origin, 
-      destinations: destinations
+      points: points, 
+      lines: lines,
+      areas: areas
     };
     localStorage.setItem("sessionData", JSON.stringify(item));
-    sessionStorage.setItem("showLanding", JSON.stringify(showLanding));
+    //sessionStorage.setItem("showLanding", JSON.stringify(showLanding));
   }
 
   useEffect(() => {
     window.addEventListener("beforeunload", onUnloadSave);
   });
 
+  /*
   return (
     <div className="App" style={style}>
       {showLanding ? (
@@ -74,7 +69,84 @@ const App = () => {
         <Output showOutput={showOutput} toggleShowOutput={toggleShowOutput} origin={origin} destinations={destinations} />
       ) : (null)}
     </div>
-  );
+  );*/
+
+  const defaultCentre = {
+    gid: 1,
+    coordinates: [77.516233, 28.494164]
+  };
+
+  const defaultLine = {
+    gid: 1,
+    points: [
+      {
+        gid: 1,
+        coordinates: [77.536233, 28.494164]
+      },
+      {
+        gid: 1,
+        coordinates: [77.556233, 28.494164]
+      },
+      {
+        gid: 1,
+        coordinates: [77.546233, 28.492164]
+      }
+    ]
+  };
+
+  const defaultArea = {
+    gid: 1,
+    points: [
+      {
+        gid: 1,
+        coordinates: [77.53133700, 28.50721867]
+      },
+      {
+        gid: 1,
+        coordinates: [77.53786711, 28.50213750]
+      },
+      {
+        gid: 1,
+        coordinates: [77.53892413, 28.51272691]
+      },
+      {
+        gid: 1,
+        coordinates: [77.53150213, 28.51518115]
+      }
+    ]
+  }
+
+  const [points, setPoints] = useState((init.points && init.points.length) ? init.points : [defaultCentre]);
+  const [lines, setLines] = useState((init.lines && init.lines.length) ? init.lines : [defaultLine]);
+  const [areas, setAreas] = useState((init.areas && init.areas.length) ? init.areas : [defaultArea]);
+  const [showOutput, toggleShowOutput] = useState(false);
+  const [showSidebar, toggleShowSidebar] = useState(true);
+
+  return (
+    <div className="App" style={style}>
+      {!showSidebar ? (
+        <div id="title">
+          <div>
+              <h1>descartes v1.3</h1>
+          </div>
+          <div style={{display: "flex", alignItems: "center", float: "right"}}>
+              <button className="collapse" title={showSidebar ? "collapse" : "expand"} onClick={() => {toggleShowSidebar(!showSidebar)}}><img src={Menu} alt="Menu" width="12px"></img></button>
+          </div>
+      </div>
+      ) : (null)}
+      <Map points={points} setPoints={setPoints} 
+      lines={lines} setLines={setLines} 
+      areas={areas} setAreas={setAreas}
+      showSidebar={showSidebar} />
+      {showSidebar ? (
+        <Sidebar 
+        points={points} setPoints={setPoints}
+        lines={lines} setLines={setLines}
+        areas={areas} setAreas={setAreas} 
+        showOutput={showOutput} toggleShowOutput={toggleShowOutput} showSidebar={showSidebar} toggleShowSidebar={toggleShowSidebar}/>
+      ) : (null)}
+    </div>
+  )
 }
 
 export default App;

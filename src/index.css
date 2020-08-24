@@ -51,6 +51,15 @@ img {
   overflow-y: auto;
   z-index: 1000;
 }*/
+#title {
+  display: flex; 
+  font-family: "Comfortaa"; 
+  position: absolute; 
+  left: 20px; 
+  top: 0; 
+  z-index: 3500; 
+  color: white;
+}
 
 #sidebar h1 {
   margin-left: 20px;
@@ -69,7 +78,7 @@ input {
   border-radius: 15px;
   background-color: rgb(226, 226, 226);
   box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.4);
-  width: 309px;
+  width: 324px;
   padding: 10px;
   font-size: 14px;
   margin-left: 20px;
@@ -82,26 +91,46 @@ input {
 }
 
 .form-container input {
-  width: 135px;
+  width: 170px;
+  height: 20px;
+  font-size: 13.5px;
+  padding: 3px;
+  border: 1.8px solid rgb(0, 152, 223);
+  border-radius: 5px;
+  outline: none;
 }
 
-#dlist::-webkit-scrollbar {
+.form-container input:focus {
+  border: 1.8px solid rgb(0, 134, 196);
+}
+
+.dlist {
+  margin-top: 5px; 
+  margin-bottom: 5px; 
+  overflow-y: auto; 
+  max-height: 300px;
+  background-color: rgb(170, 170, 170);
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.dlist::-webkit-scrollbar {
   width: 8px;
   float: right;
 }
 
-#dlist::-webkit-scrollbar-track {
+.dlist::-webkit-scrollbar-track {
   background-color: rgb(255, 255, 255);
   border-radius: 4px;
   border: 1px solid rgb(100, 100, 100);
 }
 
-#dlist::-webkit-scrollbar-thumb {
+.dlist::-webkit-scrollbar-thumb {
   background-color: rgb(54, 54, 54);
   border-radius: 4px;
 }
 
-#dlist::-webkit-scrollbar-button {
+.dlist::-webkit-scrollbar-button {
   display: none;
 }
 
@@ -201,6 +230,14 @@ input {
   padding: 0;
 }
 
+#measure {
+  position: absolute;
+  right: 15px;
+  bottom: 150px;
+  z-index: 100;
+  padding: 0;
+}
+
 #raw {
   color: rgb(23, 24, 24);
   background-color: rgb(246, 246, 246);
@@ -288,17 +325,33 @@ input {
   display: none;
 }
 
-.line {
-  background-color: rgb(226, 226, 226);
+.custom {
+  background-color: rgb(232, 232, 232);
   padding-top: 4px;
   outline: none;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   position: absolute;
+  height: 28px;
+}
+
+#point {
   right: 15px;
   top: 180px;
-  height: 28px;
+  padding: 5px;
+  padding-left: 9.5px;
+  padding-right: 9.5px;
+}
+
+#line {
+  right: 15px;
+  top: 225px;
+}
+
+#area {
+  right: 15px;
+  top: 270px;
 }
 
 .top-drawer {
