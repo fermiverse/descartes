@@ -1,27 +1,31 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "fba6519c27d8a8e8129b7439f53921cf",
+    "revision": "4833a1ab4936c04249dbd414214385a2",
     "url": "/descartes/index.html"
   },
   {
-    "revision": "0a0af802fa82c06287de",
-    "url": "/descartes/static/css/main.e1921245.chunk.css"
+    "revision": "2736d08340585e372677",
+    "url": "/descartes/static/css/main.e88bdeec.chunk.css"
   },
   {
-    "revision": "7e08153855fe1f64fa15",
-    "url": "/descartes/static/js/2.3a7e2e2d.chunk.js"
+    "revision": "dbba743a1d82f60028d4",
+    "url": "/descartes/static/js/2.eb992128.chunk.js"
   },
   {
     "revision": "0fb0e672f1308cb5b7677cdb93fc42ab",
-    "url": "/descartes/static/js/2.3a7e2e2d.chunk.js.LICENSE.txt"
+    "url": "/descartes/static/js/2.eb992128.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "0a0af802fa82c06287de",
-    "url": "/descartes/static/js/main.6d5e5df4.chunk.js"
+    "revision": "2736d08340585e372677",
+    "url": "/descartes/static/js/main.3e0c8b80.chunk.js"
   },
   {
     "revision": "715bf0adcee96bbde5b4",
     "url": "/descartes/static/js/runtime-main.9f3e12f4.js"
+  },
+  {
+    "revision": "0574f8014690d3e299842d4270ac4de1",
+    "url": "/descartes/static/media/area.0574f801.svg"
   },
   {
     "revision": "8b20cee781fd412c2a4a817be4b22d7d",
@@ -44,8 +48,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/descartes/static/media/indicator1.0b77f2e2.svg"
   },
   {
-    "revision": "b9d5e1eabb27d728e54dba5c1b916c44",
-    "url": "/descartes/static/media/indicator2.b9d5e1ea.svg"
+    "revision": "5deb17123fddb55f36740326c8c1596c",
+    "url": "/descartes/static/media/indicator2.5deb1712.svg"
+  },
+  {
+    "revision": "f93caf928c090dd324ae9fba8c38e485",
+    "url": "/descartes/static/media/indicator3.f93caf92.svg"
   },
   {
     "revision": "8bbb0af15aea07452a3557a200093760",
@@ -60,16 +68,32 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/descartes/static/media/marker1.3f22cecd.svg"
   },
   {
-    "revision": "768ee98ffce687e8be0a4d0f14d3097e",
-    "url": "/descartes/static/media/marker2.768ee98f.svg"
+    "revision": "2816d43bdc8debe9efc8502fbb854ce6",
+    "url": "/descartes/static/media/marker2.2816d43b.svg"
+  },
+  {
+    "revision": "ba8612b619857a4c8cd4552aa33729c7",
+    "url": "/descartes/static/media/marker3.ba8612b6.svg"
+  },
+  {
+    "revision": "7a9f1bc67dfb968f153948640e90e305",
+    "url": "/descartes/static/media/marker4.7a9f1bc6.svg"
   },
   {
     "revision": "4aaf92d0ed86d1b1165581081977af0d",
     "url": "/descartes/static/media/menu.4aaf92d0.svg"
   },
   {
+    "revision": "bdced74c34d8815cbd60004084009609",
+    "url": "/descartes/static/media/pencil.bdced74c.svg"
+  },
+  {
     "revision": "ad839e81cbb01e3c1a3f46e98d247029",
     "url": "/descartes/static/media/plogo.ad839e81.svg"
+  },
+  {
+    "revision": "5f83c8124cb4ed514445837bb383494c",
+    "url": "/descartes/static/media/point.5f83c812.svg"
   },
   {
     "revision": "07ddfa3b4047c1d010cb06fb4bed7941",
