@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/descartes/static/css/main.101251b5.chunk.css",
-    "main.js": "/descartes/static/js/main.d04b2069.chunk.js",
-    "main.js.map": "/descartes/static/js/main.d04b2069.chunk.js.map",
+    "main.js": "/descartes/static/js/main.0107bbbd.chunk.js",
+    "main.js.map": "/descartes/static/js/main.0107bbbd.chunk.js.map",
     "runtime-main.js": "/descartes/static/js/runtime-main.9f3e12f4.js",
     "runtime-main.js.map": "/descartes/static/js/runtime-main.9f3e12f4.js.map",
     "static/js/2.ade181c6.chunk.js": "/descartes/static/js/2.ade181c6.chunk.js",
     "static/js/2.ade181c6.chunk.js.map": "/descartes/static/js/2.ade181c6.chunk.js.map",
     "index.html": "/descartes/index.html",
-    "precache-manifest.21ecf9761c255c2f5f56baccabdc47c3.js": "/descartes/precache-manifest.21ecf9761c255c2f5f56baccabdc47c3.js",
+    "precache-manifest.30504f0c7b910f5a821f22cfac0dfdd3.js": "/descartes/precache-manifest.30504f0c7b910f5a821f22cfac0dfdd3.js",
     "service-worker.js": "/descartes/service-worker.js",
     "static/css/main.101251b5.chunk.css.map": "/descartes/static/css/main.101251b5.chunk.css.map",
     "static/js/2.ade181c6.chunk.js.LICENSE.txt": "/descartes/static/js/2.ade181c6.chunk.js.LICENSE.txt",
@@ -35,6 +35,6 @@
     "static/js/runtime-main.9f3e12f4.js",
     "static/js/2.ade181c6.chunk.js",
     "static/css/main.101251b5.chunk.css",
-    "static/js/main.d04b2069.chunk.js"
+    "static/js/main.0107bbbd.chunk.js"
   ]
 }
