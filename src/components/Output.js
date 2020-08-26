@@ -4,12 +4,12 @@ import uuid from 'react-uuid';
 
 
 
-const Output = ({showOutput, toggleShowOutput, origin, destinations}) => {
+const Output = ({showOutput, toggleShowOutput, points, lines, areas}) => {
 
-    let outCoords = [origin, ...destinations];
+    
     const [showConfirm, toggleShowConfirm] = useState(false);
 
-    return ( 
+    /*return ( 
         <div className="output">
             <div className="form-container" id="output">
                 <div style={{display: "flex", width: "100%", position: "relative"}}>
@@ -47,7 +47,21 @@ const Output = ({showOutput, toggleShowOutput, origin, destinations}) => {
                 )}
             </div>
         </div>
-     );
+     );*/
+    return (
+        <div className="output">
+            <div className="form-container" id="output">
+                <div style={{display: "flex", width: "100%", position: "relative"}}>
+                    <p>Raw Output</p>
+                    <button className="blank" id="close" title="close" onClick={() => {
+                        toggleShowOutput(false);
+                    }}>
+                        <img src={closeIcon} alt="close" width="15px"></img>
+                    </button>
+                </div>
+            </div>
+        </div>
+    )
 }
  
 export default Output;

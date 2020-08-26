@@ -3,6 +3,7 @@ import Map from './components/Map';
 import Sidebar from './components/Sidebar';
 import Output from './components/Output';
 import Landing from './components/Landing';
+import SnapMenu from './components/SnapMenu';
 import Menu from './graphics/menu.svg';
 
 
@@ -13,20 +14,10 @@ const App = () => {
     position: "relative",
     flexWrap: "nowrap",
     width: "100vw",
-    height: "100%"
+    height: window.innerHeight
   };
   
   const init = JSON.parse(localStorage.getItem("sessionData"));
-  
-  /*
-  const [origin, setOrigin] = useState(init && init["origin"] && init["origin"].length ? init["origin"] : [77.516233, 28.494164]);
-  const [destinations, setDestinations] = useState(init ? init["destinations"] : []);
-  const [showOutput, toggleShowOutput] = useState(false);
-  const landing = JSON.parse(localStorage.getItem("showLanding")) === false && JSON.parse(localStorage.getItem("showLanding")) !== null ? false
-  : (JSON.parse(sessionStorage.getItem("showLanding")) === null || JSON.parse(sessionStorage.getItem("showLanding")) === true) ? true : false;
-  const [showLanding, toggleShowLanding] = useState(landing);
-  const [showSidebar, toggleShowSidebar] = useState(true);
-  */
 
   const onUnloadSave = () => {
     const item = {
@@ -41,35 +32,6 @@ const App = () => {
   useEffect(() => {
     window.addEventListener("beforeunload", onUnloadSave);
   });
-
-  /*
-  return (
-    <div className="App" style={style}>
-      {showLanding ? (
-        <Landing showLanding={showLanding} toggleShowLanding={toggleShowLanding} />
-      ) : (null)}
-      {showSidebar ? (
-        <Sidebar 
-        destinations={destinations} setDestinations={setDestinations} 
-        origin={origin} setOrigin={setOrigin} 
-        showOutput={showOutput} toggleShowOutput={toggleShowOutput} toggleShowSidebar={toggleShowSidebar}/>
-      ) : (
-        <div style={{display: "flex", fontFamily: "Comfortaa", position: "absolute", left: "20px", top: "0", zIndex: "3000", color: "white"}}>
-            <div>
-                <h1>descartes v1.2</h1>
-            </div>
-            <div style={{display: "flex", alignItems: "center", float: "right"}}>
-                <button className="collapse" title="expand" onClick={() => {toggleShowSidebar(true)}}><img src={Menu} alt="Menu" width="12px"></img></button>
-            </div>
-        </div>
-      )}
-      
-      <Map origin={origin} setOrigin={setOrigin} destinations={destinations} setDestinations={setDestinations} showSidebar={showSidebar}/>
-      {showOutput ? (
-        <Output showOutput={showOutput} toggleShowOutput={toggleShowOutput} origin={origin} destinations={destinations} />
-      ) : (null)}
-    </div>
-  );*/
 
   const defaultCentre = {
     gid: 1,
@@ -112,18 +74,20 @@ const App = () => {
       {
         gid: 1,
         coordinates: [77.53150213, 28.51518115]
-      }
+      } 
     ]
   }
 
   const [points, setPoints] = useState((init.points && init.points.length) ? init.points : [defaultCentre]);
-  const [lines, setLines] = useState((init.lines && init.lines.length) ? init.lines : [defaultLine]);
-  const [areas, setAreas] = useState((init.areas && init.areas.length) ? init.areas : [defaultArea]);
+  const [lines, setLines] = useState((init.lines) ? init.lines : [defaultLine]);
+  const [areas, setAreas] = useState((init.areas) ? init.areas : [defaultArea]);
   const [showOutput, toggleShowOutput] = useState(false);
-  const [showSidebar, toggleShowSidebar] = useState(true);
-  const landing = JSON.parse(localStorage.getItem("showLanding")) === false && JSON.parse(localStorage.getItem("showLanding")) !== null ? false
+  const [showSidebar, toggleShowSidebar] = useState(window.innerWidth > 1000 ? true : false);
+  const landing = JSON.parse(localStorage.getItem("showLanding")) === false ? false
   : (JSON.parse(sessionStorage.getItem("showLanding")) === null || JSON.parse(sessionStorage.getItem("showLanding")) === true) ? true : false;
   const [showLanding, toggleShowLanding] = useState(landing);
+  const [showSnap, toggleShowSnap] = useState(false);
+  const [tempMarks, setTempMarks] = useState([]);
 
   return (
     <div className="App" style={style}>
@@ -131,25 +95,37 @@ const App = () => {
         <Landing showLanding={showLanding} toggleShowLanding={toggleShowLanding} />
       ) : (null)}
       {!showSidebar ? (
-        <div id="title">
-          <div>
-              <h1>descartes v1.3</h1>
+        (window.innerWidth > 1000) ? (
+          <div id="title">
+            <div>
+                <h1>descartes v1.3</h1>
+            </div>
+            <div style={{display: "flex", alignItems: "center", float: "right"}}>
+                <button className="collapse" title={showSidebar ? "collapse" : "expand"} onClick={() => {toggleShowSidebar(!showSidebar)}}><img src={Menu} alt="Menu" width="12px"></img></button>
+            </div>
           </div>
-          <div style={{display: "flex", alignItems: "center", float: "right"}}>
+        ) : (
+          <div style={{display: "flex", alignItems: "center", position: "absolute", left: "6px", top: "22.5px", zIndex: "3500"}}>
               <button className="collapse" title={showSidebar ? "collapse" : "expand"} onClick={() => {toggleShowSidebar(!showSidebar)}}><img src={Menu} alt="Menu" width="12px"></img></button>
           </div>
-      </div>
+        )
       ) : (null)}
       <Map points={points} setPoints={setPoints} 
       lines={lines} setLines={setLines} 
       areas={areas} setAreas={setAreas}
-      showSidebar={showSidebar} />
+      showSidebar={showSidebar} 
+      tempMarks={tempMarks} setTempMarks={setTempMarks} />
       {showSidebar ? (
         <Sidebar 
         points={points} setPoints={setPoints}
         lines={lines} setLines={setLines}
         areas={areas} setAreas={setAreas} 
-        showOutput={showOutput} toggleShowOutput={toggleShowOutput} showSidebar={showSidebar} toggleShowSidebar={toggleShowSidebar}/>
+        showOutput={showOutput} toggleShowOutput={toggleShowOutput} 
+        showSidebar={showSidebar} toggleShowSidebar={toggleShowSidebar}
+        showSnap={showSnap} toggleShowSnap={toggleShowSnap} />
+      ) : (null)}
+      {showSnap ? (
+        <SnapMenu lines={lines} setLines={setLines} showSnap={showSnap} toggleShowSnap={toggleShowSnap} tempMarks={tempMarks} setTempMarks={setTempMarks} />
       ) : (null)}
     </div>
   )

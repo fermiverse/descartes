@@ -17,7 +17,7 @@ import Measures from './Measures';
 let current = [];
 let mode = 0;
 
-const Map = ({points, setPoints, lines, setLines, areas, setAreas, showSidebar}) => {
+const Map = ({points, setPoints, lines, setLines, areas, setAreas, showSidebar, tempMarks, setTempMarks}) => {
 
     const origin = points.length ? points[points.length - 1].coordinates : [77.516233, 28.494164];  
 
@@ -25,7 +25,7 @@ const Map = ({points, setPoints, lines, setLines, areas, setAreas, showSidebar})
         position: "absolute",
         right: "0",
         top: "0",
-        height: window.innerHeight,
+        height: "100%",
         width: showSidebar ? "calc(100vw - 384px)" : "100vw"
     };
 
@@ -153,9 +153,12 @@ const Map = ({points, setPoints, lines, setLines, areas, setAreas, showSidebar})
                     />
                 </div>
 
-                <Points points={points} setPoints={setPoints} type={""}/>
+                <Points points={points} setPoints={setPoints} type={""} />
                 {marks.length ? (
-                    <Points points={marks} setPoints={setMarks} type={"temp"}/>
+                    <Points points={marks} setPoints={setMarks} type={"temp"} />
+                ) : (null)}
+                {tempMarks.length ? (
+                    <Points points={tempMarks} setPoints={setTempMarks} type={"temp"} />
                 ) : (null)}
                 <Lines lines={lines} setLines={setLines} />
                 <Areas areas={areas} setAreas={setAreas} />
@@ -172,7 +175,7 @@ const Map = ({points, setPoints, lines, setLines, areas, setAreas, showSidebar})
                     }
                     toggleDrawLine({draw: !drawLine.draw, init: true});
                     }}>
-                    <img src={pointIcon} alt="pt" width="10px"></img>
+                    <img src={pointIcon} alt="pt" width="6px"></img>
                 </button>
 
                 <button className="custom" id="line" title="Add a line" onClick={() => {
