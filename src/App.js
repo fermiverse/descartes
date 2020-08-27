@@ -5,6 +5,7 @@ import Output from './components/Output';
 import Landing from './components/Landing';
 import SnapMenu from './components/SnapMenu';
 import Menu from './graphics/menu.svg';
+import Input from './components/Input';
 
 
 const App = () => {
@@ -78,10 +79,11 @@ const App = () => {
     ]
   }
 
-  const [points, setPoints] = useState((init.points && init.points.length) ? init.points : [defaultCentre]);
-  const [lines, setLines] = useState((init.lines) ? init.lines : [defaultLine]);
-  const [areas, setAreas] = useState((init.areas) ? init.areas : [defaultArea]);
+  const [points, setPoints] = useState((init && init.points && init.points.length) ? init.points : [defaultCentre]);
+  const [lines, setLines] = useState((init && init.lines) ? init.lines : [defaultLine]);
+  const [areas, setAreas] = useState((init && init.areas) ? init.areas : [defaultArea]);
   const [showOutput, toggleShowOutput] = useState(false);
+  const [showInput, toggleShowInput] = useState(false);
   const [showSidebar, toggleShowSidebar] = useState(window.innerWidth > 1000 ? true : false);
   const landing = JSON.parse(localStorage.getItem("showLanding")) === false ? false
   : (JSON.parse(sessionStorage.getItem("showLanding")) === null || JSON.parse(sessionStorage.getItem("showLanding")) === true) ? true : false;
@@ -120,12 +122,21 @@ const App = () => {
         points={points} setPoints={setPoints}
         lines={lines} setLines={setLines}
         areas={areas} setAreas={setAreas} 
-        showOutput={showOutput} toggleShowOutput={toggleShowOutput} 
+        toggleShowInput={toggleShowInput} toggleShowOutput={toggleShowOutput} 
         showSidebar={showSidebar} toggleShowSidebar={toggleShowSidebar}
         showSnap={showSnap} toggleShowSnap={toggleShowSnap} />
       ) : (null)}
       {showSnap ? (
         <SnapMenu lines={lines} setLines={setLines} showSnap={showSnap} toggleShowSnap={toggleShowSnap} tempMarks={tempMarks} setTempMarks={setTempMarks} />
+      ) : (null)}
+      {showOutput ? (
+        <Output showOutput={showOutput} toggleShowOutput={toggleShowOutput} points={points} lines={lines} areas={areas} />
+      ) : (null)}
+      {showInput ? (
+        <Input showInput={showInput} toggleShowInput={toggleShowInput} 
+        points={points} setPoints={setPoints}
+        lines={lines} setLines={setLines}
+        areas={areas} setAreas={setAreas} />
       ) : (null)}
     </div>
   )

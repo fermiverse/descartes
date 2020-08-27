@@ -132,7 +132,7 @@ img {
 }
 
 #dReset:hover {
-  background-color: rgb(194, 0, 0);
+  background-color: rgb(231, 7, 7);
 }
 
 .rounded {
@@ -215,6 +215,14 @@ img {
   background-color: rgb(194, 0, 0);
 }
 
+#utils {
+  background-color: rgb(71, 7, 219);
+}
+
+#utils:hover {
+  background-color: rgb(59, 14, 165);
+}
+
 #toggle {
   position: absolute;
   right: 15px;
@@ -295,8 +303,7 @@ img {
 
 #output {
   min-width: 200px;
-  max-width: 300px;
-  max-height: 500px;
+  max-width: 500px;
 }
 
 #close {
@@ -305,12 +312,23 @@ img {
   padding: 0;
 }
 
+pre {
+  white-space: pre-wrap;       /* css-3 */
+  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+  white-space: -pre-wrap;      /* Opera 4-6 */
+  white-space: -o-pre-wrap;    /* Opera 7 */
+  word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+
 #output-coords {
-  margin-top: 30px; 
+  margin-top: 15px; 
   margin-bottom: 10px; 
   color: blue; 
   overflow-y: auto; 
-  max-height: 200px;
+  max-height: 400px;
+  background-color: rgb(180, 180, 180);
+  padding: 10px;
+  border-radius: 4px;
 }
 
 #output-coords::-webkit-scrollbar {

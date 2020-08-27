@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import CloseIcon from '../graphics/close.svg';
 import Menu from '../graphics/menu.svg';
 import Indicator1 from '../graphics/indicator1.svg';
 import Indicator2 from '../graphics/indicator2.svg';
 import Indicator3 from '../graphics/indicator3.svg';
 import uuid from 'react-uuid';
+import Inline from './Inline';
 
-const Sidebar = ({points, setPoints, lines, setLines, areas, setAreas, showOutput, toggleShowOutput, showSidebar, toggleShowSidebar, showSnap, toggleShowSnap}) => {
+const Sidebar = ({points, setPoints, lines, setLines, areas, setAreas, toggleShowInput, toggleShowOutput, showSidebar, toggleShowSidebar, showSnap, toggleShowSnap}) => {
     
+    const [showInline, toggleShowInline] = useState(false);
     const style = {
         width: "384px",
         minWidth: "384px",
@@ -74,8 +76,22 @@ const Sidebar = ({points, setPoints, lines, setLines, areas, setAreas, showOutpu
                 </div>
             </div>
             <div className="form-container">
+                <button className="rounded" id="utils" title="Input geoJSON" onClick={() => {
+                    toggleShowInput(true);
+                }}>Input</button>
+                <button className="rounded" id="utils" title="Output geoJSON" style={{marginLeft: "10px"}} onClick={() => {
+                    toggleShowOutput(true);
+                }}>Output</button>
+                <button className="rounded" id="utils" title="Remote geoJSON" style={{marginLeft: "10px"}} onClick={() => {
+                    toggleShowInline(!showInline);
+                }}>Remote</button>
+            </div>
+            {showInline ? (
+                <Inline />
+            ) : (null)}
+            <div className="form-container">
                 <div style={{display: "flex", alignItems: "baseline"}}>
-                    <p>POINT(S)</p>
+                    <p>Point(s)</p>
                     <img src={Indicator1} alt="i1" width="10px" style={{marginLeft: "6px"}}/>
                 </div>
                 <div className="dlist">
@@ -100,7 +116,7 @@ const Sidebar = ({points, setPoints, lines, setLines, areas, setAreas, showOutpu
             </div>
             <div className="form-container">
                 <div style={{display: "flex", alignItems: "baseline"}}>
-                    <p>LINE(S)</p>
+                    <p>Line(s)</p>
                     <img src={Indicator2} alt="i2" height="10px" style={{marginLeft: "6px"}}/>
                 </div>
                 <div className="dlist">
@@ -136,7 +152,7 @@ const Sidebar = ({points, setPoints, lines, setLines, areas, setAreas, showOutpu
             </div>
             <div className="form-container">
                 <div style={{display: "flex", alignItems: "center"}}>
-                    <p>AREA(S)</p>
+                    <p>Area(s)</p>
                     <img src={Indicator3} alt="i3" width="30px" style={{marginLeft: "6px"}}/>
                 </div>
                 <div className="dlist">

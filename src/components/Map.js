@@ -130,7 +130,7 @@ const Map = ({points, setPoints, lines, setLines, areas, setAreas, showSidebar, 
         <div id="map" style={mapStyle}>
             <ReactMapGL
             {...viewPort}
-            mapboxApiAccessToken={"pk.eyJ1IjoiZmVybWl2ZXJzZSIsImEiOiJja2Q2YzJ3Zjkwam1mMnFuMG1zNjg5eDhmIn0.SwCaqFKXTC_-WkcbYqFcsQ"}
+            mapboxApiAccessToken={"pk.eyJ1IjoiZmVybWl2ZXJzZSIsImEiOiJja2Q2YzU0ejcwNWUyMnl2cTB6Z21vYXZsIn0.hlNWecQooJMCAwLdqiM-cQ"}
             mapStyle={showSatMap ? "mapbox://styles/mapbox/satellite-v9" : "mapbox://styles/fermiverse/ckd7yqq7u084t1iqj97nvbjc6"}
             onViewportChange={(viewPort) => {
                 setViewPort({...viewPort, width: "fit", height: "fit"})
