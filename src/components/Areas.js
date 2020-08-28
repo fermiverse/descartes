@@ -5,12 +5,19 @@ import areaMarker from '../graphics/marker4.svg';
 
 
 class Areas extends PureComponent {
+
+    pointCount = () => {
+        let pts = 0;
+        this.props.areas.forEach(area => pts += area.points.length)
+        return pts;
+    }
+
     render() {
         const areas = this.props.areas;
         const setAreas = this.props.setAreas;
         
-        return (
-            areas.map(area => (
+        return (this.pointCount() < 100 ?
+            (areas.map(area => (
                 area.points.map(point => (
                     <Marker
                     key={uuid()}
@@ -42,7 +49,7 @@ class Areas extends PureComponent {
                         </div>
                     </Marker>
                 ))
-            ))
+            ))) : (null)
         )
     }
 

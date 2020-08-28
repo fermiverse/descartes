@@ -5,12 +5,19 @@ import lineMarker from '../graphics/marker2.svg';
 
 
 class Lines extends PureComponent {
+
+    pointCount = () => {
+        let pts = 0;
+        this.props.lines.forEach(line => pts += line.points.length)
+        return pts;
+    }
+
     render() {
         const lines = this.props.lines;
         const setLines = this.props.setLines;
         
-        return (
-            lines.map(line => (
+        return (this.pointCount() < 100 ?
+            (lines.map(line => (
                 line.points.map(point => (
                     <Marker
                     key={uuid()}
@@ -42,7 +49,7 @@ class Lines extends PureComponent {
                         </div>
                     </Marker>
                 ))
-            ))
+            ))) : (null)
         )
     }
 

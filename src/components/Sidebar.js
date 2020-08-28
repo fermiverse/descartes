@@ -1,13 +1,20 @@
 import React, { useState } from 'react';
 import CloseIcon from '../graphics/close.svg';
 import Menu from '../graphics/menu.svg';
+import DB from '../graphics/block.svg';
 import Indicator1 from '../graphics/indicator1.svg';
 import Indicator2 from '../graphics/indicator2.svg';
 import Indicator3 from '../graphics/indicator3.svg';
 import uuid from 'react-uuid';
 import Inline from './Inline';
 
-const Sidebar = ({points, setPoints, lines, setLines, areas, setAreas, toggleShowInput, toggleShowOutput, showSidebar, toggleShowSidebar, showSnap, toggleShowSnap}) => {
+const Sidebar = ({points, setPoints, 
+    lines, setLines, 
+    areas, setAreas, 
+    toggleShowInput, toggleShowOutput, 
+    showSidebar, toggleShowSidebar, 
+    showSnap, toggleShowSnap, 
+    showConfig, toggleShowConfig}) => {
     
     const [showInline, toggleShowInline] = useState(false);
     const style = {
@@ -72,6 +79,7 @@ const Sidebar = ({points, setPoints, lines, setLines, areas, setAreas, toggleSho
                     <h1>descartes v1.3</h1>
                 </div>
                 <div style={{display: "flex", alignItems: "center", float: "right"}}>
+                    <button className="collapse" title="Configuration"  style={{paddingTop: "6.5px"}} onClick={() => {toggleShowConfig(true)}}><img src={DB} alt="DB" width="14px"></img></button>
                     <button className="collapse" title={showSidebar ? "collapse" : "expand"} onClick={() => {toggleShowSidebar(!showSidebar)}}><img src={Menu} alt="Menu" width="12px"></img></button>
                 </div>
             </div>
@@ -87,7 +95,11 @@ const Sidebar = ({points, setPoints, lines, setLines, areas, setAreas, toggleSho
                 }}>Remote</button>
             </div>
             {showInline ? (
-                <Inline />
+                <Inline 
+                points={points} setPoints={setPoints} 
+                lines={lines} setLines={setLines} 
+                areas={areas} setAreas={setAreas} 
+                toggleShowInline={toggleShowInline} />
             ) : (null)}
             <div className="form-container">
                 <div style={{display: "flex", alignItems: "baseline"}}>
@@ -144,11 +156,11 @@ const Sidebar = ({points, setPoints, lines, setLines, areas, setAreas, toggleSho
                         )
                     })}
                 </div>
-                <button className="rounded" id="dReset" title="Reset Lines" style={{marginLeft: "0"}} onClick={(e) => {
+                <button className="rounded" id="snap" title="Snap to road" style={{marginLeft: "0"}} onClick={() => {toggleShowSnap(true)}}>Snap</button>
+                <button className="rounded" id="dReset" title="Reset Lines" style={{marginLeft: "10px"}} onClick={(e) => {
                     e.preventDefault();
                     setLines([]);
                 }}>Reset</button>
-                <button className="rounded" id="snap" onClick={() => {toggleShowSnap(true)}} title="snap to road">Snap</button>
             </div>
             <div className="form-container">
                 <div style={{display: "flex", alignItems: "center"}}>

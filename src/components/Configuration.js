@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import closeIcon from '../graphics/close.svg';
 
 
-const Input = ({showInput, toggleShowInput, points, lines, areas, setPoints, setLines, setAreas}) => {
 
+const Configuration = ({showConfig, toggleShowConfig, points, lines, areas, setPoints, setLines, setAreas}) => {
 
     const [showConfirm, toggleShowConfirm] = useState(false);
 
@@ -74,29 +74,23 @@ const Input = ({showInput, toggleShowInput, points, lines, areas, setPoints, set
         <div className="output">
             <div className="form-container" id="output">
                 <div style={{display: "flex", width: "100%", position: "relative"}}>
-                    <p>GeoJSON Input</p>
+                    <p>Configuration</p>
                     {showConfirm ? (
                         <p style={{color: "rgb(30, 165, 17)", marginLeft: "12px"}}>
                             geoJSON accepted
                         </p>
                     ) : (null)}
                     <button className="blank" id="close" title="close" onClick={() => {
-                        toggleShowInput(false);
+                        toggleShowConfig(false);
                     }}>
                         <img src={closeIcon} alt="close" width="15px"></img>
                     </button>
                 </div>
-                <div id="output-coords">
-                    <pre id="out-geojson" contentEditable="true" style={{outline: "none", minHeight: "30px"}} onFocus={() => {
-                        navigator.clipboard.readText().then((clipText) => {
-                            document.getElementById("out-geojson").innerText = clipText;
-                        })
-                    }}>
-                    </pre>
-                </div>
+                <p style={{color: "rgb(17, 187, 31)", fontSize: "12px", marginTop: "5px"}}><i>Paste a valid Nawgati configuration url</i></p>
+            
                 <div style={{display: "flex"}}>
                     <button className="rounded" id="copy" title="Overwrite and Insert" onClick={() => {
-                        let txt = document.getElementById("out-geojson").innerText;
+                        let txt = document.getElementById("db-geojson").innerText;
                         if (txt) {
                             try {
                                 let geojson = JSON.parse(txt);
@@ -107,25 +101,10 @@ const Input = ({showInput, toggleShowInput, points, lines, areas, setPoints, set
                         }
                         
                     }}>Insert</button>
-                    <button className="rounded" id="append" style={{marginLeft: "10px"}} title="Append" onClick={() => {
-                        let txt = document.getElementById("out-geojson").innerText;
-                        if (txt) {
-                            try {
-                                let geojson = JSON.parse(txt);
-                                toState(geojson, 0);
-                            } catch (error) {
-                                alert("Invalid JSON in input field!");
-                            }
-                        }
-                        
-                    }}>Append</button>
-                    <button className="rounded" id="dReset" title="Clear input" style={{marginLeft: "10px"}} onClick={() => {
-                        document.getElementById("out-geojson").innerText = "";
-                    }}>Clear</button>
                 </div>
             </div>
         </div>
     )
 }
  
-export default Input;
+export default Configuration;

@@ -6,6 +6,7 @@ import Landing from './components/Landing';
 import SnapMenu from './components/SnapMenu';
 import Menu from './graphics/menu.svg';
 import Input from './components/Input';
+import Configuration from './components/Configuration';
 
 
 const App = () => {
@@ -84,6 +85,7 @@ const App = () => {
   const [areas, setAreas] = useState((init && init.areas) ? init.areas : [defaultArea]);
   const [showOutput, toggleShowOutput] = useState(false);
   const [showInput, toggleShowInput] = useState(false);
+  const [showConfig, toggleShowConfig] = useState(false);
   const [showSidebar, toggleShowSidebar] = useState(window.innerWidth > 1000 ? true : false);
   const landing = JSON.parse(localStorage.getItem("showLanding")) === false ? false
   : (JSON.parse(sessionStorage.getItem("showLanding")) === null || JSON.parse(sessionStorage.getItem("showLanding")) === true) ? true : false;
@@ -124,7 +126,8 @@ const App = () => {
         areas={areas} setAreas={setAreas} 
         toggleShowInput={toggleShowInput} toggleShowOutput={toggleShowOutput} 
         showSidebar={showSidebar} toggleShowSidebar={toggleShowSidebar}
-        showSnap={showSnap} toggleShowSnap={toggleShowSnap} />
+        showSnap={showSnap} toggleShowSnap={toggleShowSnap} 
+        showConfig={showConfig} toggleShowConfig={toggleShowConfig} />
       ) : (null)}
       {showSnap ? (
         <SnapMenu lines={lines} setLines={setLines} showSnap={showSnap} toggleShowSnap={toggleShowSnap} tempMarks={tempMarks} setTempMarks={setTempMarks} />
@@ -134,6 +137,13 @@ const App = () => {
       ) : (null)}
       {showInput ? (
         <Input showInput={showInput} toggleShowInput={toggleShowInput} 
+        points={points} setPoints={setPoints}
+        lines={lines} setLines={setLines}
+        areas={areas} setAreas={setAreas} />
+      ) : (null)}
+      {showConfig ? (
+        <Configuration 
+        showConfig={showConfig} toggleShowConfig={toggleShowConfig} 
         points={points} setPoints={setPoints}
         lines={lines} setLines={setLines}
         areas={areas} setAreas={setAreas} />
