@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "4305462b086bb72ea6dec831856d66e9",
+    "revision": "3a66d1e7d146b3188127a27595ce9596",
     "url": "/descartes/index.html"
   },
   {
-    "revision": "01f706858188b765eff1",
-    "url": "/descartes/static/css/main.28b3384f.chunk.css"
+    "revision": "5f555d91d76ed5978565",
+    "url": "/descartes/static/css/main.52d1e81a.chunk.css"
   },
   {
-    "revision": "0f3cf8e3deb78ca71155",
-    "url": "/descartes/static/js/2.ba58a7da.chunk.js"
+    "revision": "a25c4dc44970ae81fccf",
+    "url": "/descartes/static/js/2.56837886.chunk.js"
   },
   {
     "revision": "0fb0e672f1308cb5b7677cdb93fc42ab",
-    "url": "/descartes/static/js/2.ba58a7da.chunk.js.LICENSE.txt"
+    "url": "/descartes/static/js/2.56837886.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "01f706858188b765eff1",
-    "url": "/descartes/static/js/main.67af4e69.chunk.js"
+    "revision": "5f555d91d76ed5978565",
+    "url": "/descartes/static/js/main.73335ba9.chunk.js"
   },
   {
     "revision": "715bf0adcee96bbde5b4",
@@ -40,6 +40,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/descartes/static/media/earth.11093ee1.svg"
   },
   {
+    "revision": "4ef41a513b8cd3f9f00f74aa6d4ccc96",
+    "url": "/descartes/static/media/expand.4ef41a51.svg"
+  },
+  {
     "revision": "cc27234c5c7eeeb10b21da0e1f4bc997",
     "url": "/descartes/static/media/graph.cc27234c.svg"
   },
@@ -54,6 +58,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "f93caf928c090dd324ae9fba8c38e485",
     "url": "/descartes/static/media/indicator3.f93caf92.svg"
+  },
+  {
+    "revision": "8bbb0af15aea07452a3557a200093760",
+    "url": "/descartes/static/media/information.8bbb0af1.svg"
   },
   {
     "revision": "2ddc5da15c05445833e5e3836f429ecb",
