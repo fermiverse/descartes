@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import CloseIcon from '../graphics/close.svg';
 import Menu from '../graphics/menu.svg';
-import DB from '../graphics/block.svg';
 import Indicator1 from '../graphics/indicator1.svg';
 import Indicator2 from '../graphics/indicator2.svg';
 import Indicator3 from '../graphics/indicator3.svg';
-import uuid from 'react-uuid';
 import Inline from './Inline';
+import ListPoints from './ListPoints';
+import ListEntities from './ListEntities';
+import Options from './Options';
 
 const Sidebar = ({points, setPoints, 
     lines, setLines, 
@@ -14,9 +14,11 @@ const Sidebar = ({points, setPoints,
     toggleShowInput, toggleShowOutput, 
     showSidebar, toggleShowSidebar, 
     showSnap, toggleShowSnap, 
-    showConfig, toggleShowConfig}) => {
+    activeGid, setActiveGid,
+    gids, setGids}) => {
     
     const [showInline, toggleShowInline] = useState(false);
+    const [displayGid, setDisplayGid] = useState(activeGid);
     const style = {
         width: "384px",
         minWidth: "384px",
@@ -27,7 +29,7 @@ const Sidebar = ({points, setPoints,
         backgroundColor: "rgb(3, 11, 26)",
         overflowY: "auto",
         zIndex: "1000"
-    }
+    };
 
     const validateField = (lat, lng) => {
         if (lat === "" || lng === "") {
@@ -37,51 +39,59 @@ const Sidebar = ({points, setPoints,
         return isValid
     };
 
-     const form = (type) => {
-        if (type === "line") {
-            return (
-                <div></div>
-            )
-        } else if (type === "point") {
-            return (
-                <form onSubmit={(e) => {
-                    e.preventDefault();
-                    const cds = e.target.elements[0].value.split(',')
-                    if (validateField(cds[0], cds[1])) {
-                        let newPoint = {
-                            gid: 1,
-                            name: `P${points.length+1}`,
-                            coordinates: [Number(cds[1]), Number(cds[0])]
-                        }
-                        setPoints([...points, newPoint]);
-                        e.target.reset()
-                    } else {
-                        alert("Enter valid coordinates in input field!");
+     const form = () => {
+        return (
+            <form onSubmit={(e) => {
+                e.preventDefault();
+                const cds = e.target.elements[0].value.split(',')
+                if (validateField(cds[0], cds[1])) {
+                    let newPoint = {
+                        gid: activeGid,
+                        name: `P${points.length+1}`,
+                        coordinates: [Number(cds[1]), Number(cds[0])]
                     }
-                }}>
-                    <label style={{fontSize: "20px", marginLeft: "0", marginRight: "5px"}}><b>+</b></label>
-                    <input id="coords" type="text" placeholder=" <Latitude>, <Longitude>" autoComplete="off"></input>
-                    <div style={{display: "flex"}}>
-                        <button className="rounded" type="submit">Add</button>
-                        <button className="rounded" id="dReset" title="Reset Points" onClick={(e) => {
-                            e.preventDefault();
-                            setPoints([]);
-                        }}>Reset</button>
-                    </div>
-                </form>
-            )
-        }
+                    setPoints([...points, newPoint]);
+                    e.target.reset()
+                } else {
+                    alert("Enter valid coordinates in input field!");
+                }
+            }}>
+                <label style={{fontSize: "20px", marginLeft: "0", marginRight: "5px"}}><b>+</b></label>
+                <input id="coords" type="text" placeholder="<Latitude>, <Longitude>" autoComplete="off"></input>
+                <div style={{display: "flex"}}>
+                    <button className="rounded" type="submit">Add</button>
+                    <button className="rounded" id="dReset" title="Reset Points" onClick={(e) => {
+                        e.preventDefault();
+                        const fpoints = points.filter(point => point.gid !== displayGid);
+                        if (points.length > fpoints.length) {
+                            const conf = window.confirm("Delete all points from active group?");
+                            if (conf) {
+                                setPoints(fpoints);
+                            }
+                        }
+                    }}>Reset</button>
+                </div>
+            </form>
+        )
     };
-     return (
+    return (
         <div id="sidebar" style={style}>
             <div style={{display: "flex", fontFamily: "Comfortaa", color: "white"}}>
                 <div>
-                    <h1>descartes v1.3</h1>
+                    <h1>descartes v2.0</h1>
                 </div>
                 <div style={{display: "flex", alignItems: "center", float: "right"}}>
-                    <button className="collapse" title="Configuration"  style={{paddingTop: "6.5px"}} onClick={() => {toggleShowConfig(true)}}><img src={DB} alt="DB" width="14px"></img></button>
-                    <button className="collapse" title={showSidebar ? "collapse" : "expand"} onClick={() => {toggleShowSidebar(!showSidebar)}}><img src={Menu} alt="Menu" width="12px"></img></button>
+                    <button className="collapse" title={showSidebar ? "collapse" : "expand"} onClick={() => {toggleShowSidebar(!showSidebar)}}>
+                        <img src={Menu} alt="Menu" width="14px"></img>
+                    </button>
                 </div>
+            </div>
+            <div className="form-container">
+                <Options gids={gids} setGids={setGids} 
+                activeGid={activeGid} setActiveGid={setActiveGid} 
+                displayGid={displayGid} setDisplayGid={setDisplayGid} 
+                points={points} lines={lines} areas={areas}
+                setPoints={setPoints} setLines={setLines} setAreas={setAreas} />
             </div>
             <div className="form-container">
                 <button className="rounded" id="utils" title="Input geoJSON" onClick={() => {
@@ -99,107 +109,55 @@ const Sidebar = ({points, setPoints,
                 points={points} setPoints={setPoints} 
                 lines={lines} setLines={setLines} 
                 areas={areas} setAreas={setAreas} 
-                toggleShowInline={toggleShowInline} />
+                toggleShowInline={toggleShowInline} activeGid={activeGid} gids={gids} setGids={setGids} />
             ) : (null)}
             <div className="form-container">
                 <div style={{display: "flex", alignItems: "baseline"}}>
-                    <p>Point(s)</p>
+                    <p>{`Points (${points.filter(point => point.gid === displayGid).length})`}</p>
                     <img src={Indicator1} alt="i1" width="10px" style={{marginLeft: "6px"}}/>
                 </div>
-                <div className="dlist">
-                    {points.length ? (
-                        points.map((point) => (
-                            <div key={uuid()} style={{color: "blue", display: "flex", alignItems: "baseline"}}>
-                                <p>{`${points.indexOf(point)+1}.  [${point.coordinates[1].toFixed(8)}, ${point.coordinates[0].toFixed(8)}]`}</p>
-                                <button className="blank" title="Clear" onClick={() => {
-                                    let index = points.indexOf(point);
-                                    let newPoints = points.slice();
-                                    if (index > -1) {
-                                        newPoints.splice(index, 1);
-                                        setPoints(newPoints);
-                                    }
-                                }}><img src={CloseIcon} alt="close" width="12px"></img></button>
-                            </div> 
-                        )) 
-                    ) : (null)}
-                </div>
-                {form("point")}
+                <ListPoints points={displayGid ? points.filter(point => point.gid === displayGid) : points} setPoints={setPoints} />
+                {form()}
 
             </div>
             <div className="form-container">
                 <div style={{display: "flex", alignItems: "baseline"}}>
-                    <p>Line(s)</p>
+                    <p>{`Lines (${lines.filter(line => line.gid === displayGid).length})`}</p>
                     <img src={Indicator2} alt="i2" height="10px" style={{marginLeft: "6px"}}/>
                 </div>
-                <div className="dlist">
-                    {lines.map(line => {
-                        let pts = line.points;
-                        return (
-                            <div key={uuid()}>
-                                <div key={uuid()} style={{display: "flex", alignItems: "baseline", marginBottom: "5px", marginTop: "5px"}}>
-                                    <p>{`${lines.indexOf(line)+1}. LineString ${lines.indexOf(line)+1}`}</p>
-                                    <button className="blank" title="Clear" onClick={() => {
-                                        let index = lines.indexOf(line);
-                                        let newLines = lines.slice();
-                                        if (index > -1) {
-                                            newLines.splice(index, 1);
-                                            setLines(newLines);
-                                        }
-                                    }}><img src={CloseIcon} alt="close" width="12px" style={{padding: "0"}}></img></button>
-                                </div>
-                                {pts.map(pt => (
-                                    <div key={uuid()} style={{color: "blue", display: "flex", alignItems: "baseline", marginLeft: "15px"}}>
-                                        <p>{`${pts.indexOf(pt)+1}.  [${pt.coordinates[1].toFixed(8)}, ${pt.coordinates[0].toFixed(8)}]`}</p>    
-                                    </div>
-                                ))}
-                            </div>
-                        )
-                    })}
-                </div>
+                <ListEntities entities={displayGid ? lines.filter(line => line.gid === displayGid) : lines} setEntities={setLines} type={"lines"} />
                 <button className="rounded" id="snap" title="Snap to road" style={{marginLeft: "0"}} onClick={() => {toggleShowSnap(true)}}>Snap</button>
                 <button className="rounded" id="dReset" title="Reset Lines" style={{marginLeft: "10px"}} onClick={(e) => {
                     e.preventDefault();
-                    setLines([]);
+                    const flines = lines.filter(line => line.gid !== displayGid);
+                    if (lines.length > flines.length) {
+                        const conf = window.confirm("Delete all lines from active group?");
+                        if (conf) {
+                            setLines(flines);
+                        }
+                    }
                 }}>Reset</button>
             </div>
             <div className="form-container">
                 <div style={{display: "flex", alignItems: "center"}}>
-                    <p>Area(s)</p>
-                    <img src={Indicator3} alt="i3" width="30px" style={{marginLeft: "6px"}}/>
+                    <p>{`Areas (${areas.filter(area => area.gid === displayGid).length})`}</p>
+                    <img src={Indicator3} alt="i3" width="30px" style={{marginLeft: "6px"}} />
                 </div>
-                <div className="dlist">
-                    {areas.map(area => {
-                        let pts = area.points;
-                        return (
-                            <div key={uuid()}>
-                                <div key={uuid()} style={{display: "flex", alignItems: "baseline", marginBottom: "5px", marginTop: "5px"}}>
-                                    <p>{`${areas.indexOf(area)+1}. Polygon ${areas.indexOf(area)+1}`}</p>
-                                    <button className="blank" title="Clear" onClick={() => {
-                                        let index = areas.indexOf(area);
-                                        let newAreas = areas.slice();
-                                        if (index > -1) {
-                                            newAreas.splice(index, 1);
-                                            setAreas(newAreas);
-                                        }
-                                    }}><img src={CloseIcon} alt="close" width="12px" style={{padding: "0"}}></img></button>
-                                </div>
-                                {pts.map(pt => (
-                                    <div key={uuid()} style={{color: "blue", display: "flex", alignItems: "baseline", marginLeft: "15px"}}>
-                                        <p>{`${pts.indexOf(pt)+1}.  [${pt.coordinates[1].toFixed(8)}, ${pt.coordinates[0].toFixed(8)}]`}</p>    
-                                    </div>
-                                ))}
-                            </div>
-                        )
-                    })}
-                </div>
+                <ListEntities entities={displayGid ? areas.filter(area => area.gid === displayGid) : areas} setEntities={setAreas} type={"areas"} />
                 <button className="rounded" id="dReset" title="Reset Lines" style={{marginLeft: "0"}} onClick={(e) => {
                     e.preventDefault();
-                    setAreas([]);
+                    const fareas = areas.filter(area => area.gid !== displayGid);
+                    if (areas.length > fareas.length) {
+                        const conf = window.confirm("Delete all polygons from active group?");
+                        if (conf) {
+                            setAreas(fareas);
+                        }
+                    }
                 }}>Reset</button>
             </div>
             
         </div>
-     );
+    );
 }
  
 export default Sidebar;

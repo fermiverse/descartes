@@ -1,32 +1,38 @@
 import React, { useState } from 'react';
 import closeIcon from '../graphics/close.svg';
+import uuid from 'react-uuid';
 
 
-const Output = ({showOutput, toggleShowOutput, points, lines, areas}) => {
+const Output = ({showOutput, toggleShowOutput, points, lines, areas, gids, activeGid}) => {
 
     
     const [showConfirm, toggleShowConfirm] = useState(false);
+    const [selectedGroup, setSelectedGroup] = useState(activeGid);
 
-    const toGeojson = (points, lines, areas) => {
-        let geoPoints = points.map(point => ({
+    let fpoints = selectedGroup === "All" ? points : points.filter(point => point.gid === selectedGroup);
+    let flines = selectedGroup === "All" ? lines : lines.filter(line => line.gid === selectedGroup);
+    let fareas = selectedGroup === "All" ? areas : areas.filter(area => area.gid === selectedGroup);
+
+    const toGeojson = (fpoints, flines, fareas) => {
+        let geoPoints = fpoints.map(point => ({
             type: "Feature",
-            properties: {},
+            properties: point.properties ? point.properties : {},
             geometry: {
                 type: "Point",
                 coordinates: point.coordinates
             }    
         }));
-        let geoLines = lines.map(line => ({
+        let geoLines = flines.map(line => ({
             type: "Feature",
-            properties: {},
+            properties: line.properties ? line.properties : {},
             geometry: {
                 type: "LineString",
                 coordinates: line.points.map(point => point.coordinates)
             }
         }));
-        let geoAreas = areas.map(area => ({
+        let geoAreas = fareas.map(area => ({
             type: "Feature",
-            properties: {},
+            properties: area.properties ? area.properties : {},
             geometry: {
                 type: "Polygon",
                 coordinates: [area.points.map(point => point.coordinates).concat([area.points[0].coordinates])]
@@ -39,7 +45,7 @@ const Output = ({showOutput, toggleShowOutput, points, lines, areas}) => {
         };
         let stringifiedGeoObj = JSON.stringify(geoObj, undefined, 2);
         return stringifiedGeoObj;
-    }
+    };
     
     return (
         <div className="output">
@@ -58,11 +64,20 @@ const Output = ({showOutput, toggleShowOutput, points, lines, areas}) => {
                     </button>
                 </div>
                 <div style={{color: "rgb(50, 50, 50)"}}>
-                    {`${points.length} points, ${lines.length} lines, ${areas.length} polygons`}
+                    {`${fpoints.length} points, ${flines.length} lines, ${fareas.length} polygons`}
                 </div>
+                <select onChange={(e) => {
+                    if (e.target.value) setSelectedGroup(e.target.value);
+                    console.log(e.target.value)
+                }} value={selectedGroup}>
+                    {gids.map(gid => (
+                        <option key={uuid()}>{gid}</option>
+                    ))}
+                    <option key={uuid()}>All</option>
+                </select>
                 <div id="output-coords">
-                    <pre id="out-geojson" contentEditable="true" style={{outline: "none"}}>
-                        {toGeojson(points, lines, areas)}
+                    <pre id="out-geojson" contentEditable="true" suppressContentEditableWarning={true} style={{outline: "none"}}>
+                        {toGeojson(fpoints, flines, fareas)}
                     </pre>
                 </div>
                 <div style={{display: "flex"}}>
@@ -79,7 +94,7 @@ const Output = ({showOutput, toggleShowOutput, points, lines, areas}) => {
                     }}>Copy</button>
                     <button className="rounded" style={{marginLeft: "10px"}} onClick={() => {
                         let outElem = document.getElementById("out-geojson");
-                        outElem.textContent = toGeojson(points, lines, areas);
+                        outElem.textContent = toGeojson(fpoints, flines, fareas);
                     }}>Regenerate</button>
                 </div>
             </div>

@@ -6,7 +6,7 @@ import axios from 'axios';
 
 
 
-const SnapMenu = ({showSnap, toggleShowSnap, lines, setLines, tempMarks, setTempMarks}) => {
+const SnapMenu = ({showSnap, toggleShowSnap, lines, setLines, tempMarks, setTempMarks, activeGid}) => {
 
     const reverseLine = (line) => {
         let revPts = line.points.slice();
@@ -52,7 +52,7 @@ const SnapMenu = ({showSnap, toggleShowSnap, lines, setLines, tempMarks, setTemp
                 </button>
             </div>
             <div className="dlist">
-                {lines.map(line => {
+                {lines.filter(line => line.gid === activeGid).map(line => {
                     let pts = line.points;
                     return (
                         <div key={uuid()}>
@@ -87,7 +87,7 @@ const SnapMenu = ({showSnap, toggleShowSnap, lines, setLines, tempMarks, setTemp
             }}>Reverse snap</button>
             <button className="rounded" id="snap-ext" title="Apply change" onClick={(e) => {
                 e.preventDefault();
-                if (index && tempMarks) {
+                if (index && tempMarks.length) {
                     let modLines = [...lines];
                     modLines.splice(index, 1, {
                         gid: 1,

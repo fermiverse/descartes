@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import closeIcon from '../graphics/close.svg';
 
 
-const Input = ({showInput, toggleShowInput, points, lines, areas, setPoints, setLines, setAreas}) => {
+const Input = ({showInput, toggleShowInput, points, lines, areas, setPoints, setLines, setAreas, gids, setGids, activeGid}) => {
 
 
     const [showConfirm, toggleShowConfirm] = useState(false);
@@ -13,7 +13,24 @@ const Input = ({showInput, toggleShowInput, points, lines, areas, setPoints, set
         return newArr
     };
 
+    const elemCount = (points, lines, areas) => {
+        let count = 0;
+        count += points.length;
+        for (const line of lines) count += line.geometry.coordinates.length;
+        for (const area of areas) count += area.geometry.coordinates.length;
+        return count;
+    };
+
+    const rand = (guess) => {
+        if (gids.includes(guess)) {
+            const res = +guess.replace("Group ", "");
+            return rand("Group " + (res + 1));
+        } else return guess;
+    };
+
     const toState = (geojson, mode) => {
+        let newGid = "Group " + (gids.length + 1);
+        newGid = rand(newGid);
         try {
             let features = geojson.features;
 
@@ -25,39 +42,46 @@ const Input = ({showInput, toggleShowInput, points, lines, areas, setPoints, set
                 coordinates: geoArea.geometry.coordinates[0]
             }}));
 
+            if (elemCount(geoPoints, geoLines, geoAreas) > 1000) {
+                alert("Warning: Heavy dataset loaded. This will be rendered as static geoJSON in a separate group.");
+                mode = 1;
+            }
+
             let newPoints = geoPoints.map(item => ({
-                gid: 1,
+                properties: item.properties ? item.properties : {},
+                gid: mode ? newGid : activeGid,
                 coordinates: item.geometry.coordinates
             }));
+
             let newLines = geoLines.map(item => ({
-                gid: 1,
+                properties: item.properties ? item.properties : {},
+                gid: mode ? newGid : activeGid,
                 points: item.geometry.coordinates.map(coord => ({
-                    gid: 1,
+                    gid: mode ? newGid : activeGid,
                     coordinates: coord
                 }))
             }));
             
             let newAreas = geoAreas.map(item => ({
-                gid: 1,
+                properties: item.properties ? item.properties : {},
+                gid: mode ? newGid : activeGid,
                 points: popFunction(item.geometry.coordinates.map(coord => ({
-                    gid: 1,
+                    gid: mode ? newGid : activeGid,
                     coordinates: coord
                 })))
             }));
 
             if (mode) {
-                setPoints(newPoints);
-                setLines(newLines);
-                setAreas(newAreas);
-            } else {
-                setPoints([...points, ...newPoints]);
-                setLines([...lines, ...newLines]);
-                setAreas([...areas, ...newAreas]);
+                setGids([...gids, newGid]);
             }
+            
+            setPoints([...points, ...newPoints]);
+            setLines([...lines, ...newLines]);
+            setAreas([...areas, ...newAreas]);
             toggleShowConfirm(true);
 
         } catch (error) {
-            alert("Invalid geoJSON object!");
+            console.log("Invalid geoJSON object(s) entered");
         }
         
     };
@@ -95,7 +119,7 @@ const Input = ({showInput, toggleShowInput, points, lines, areas, setPoints, set
                     </pre>
                 </div>
                 <div style={{display: "flex"}}>
-                    <button className="rounded" id="copy" title="Overwrite and Insert" onClick={() => {
+                    <button className="rounded" id="copy" title="Insert to new group" onClick={() => {
                         let txt = document.getElementById("out-geojson").innerText;
                         if (txt) {
                             try {
@@ -107,7 +131,7 @@ const Input = ({showInput, toggleShowInput, points, lines, areas, setPoints, set
                         }
                         
                     }}>Insert</button>
-                    <button className="rounded" id="append" style={{marginLeft: "10px"}} title="Append" onClick={() => {
+                    <button className="rounded" id="append" style={{marginLeft: "10px"}} title="Append to active group" onClick={() => {
                         let txt = document.getElementById("out-geojson").innerText;
                         if (txt) {
                             try {

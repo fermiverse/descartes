@@ -13,11 +13,12 @@ import Areas from './Areas';
 import LineLayers from './LineLayers';
 import AreaLayers from './AreaLayers';
 import Measures from './Measures';
+import PointLayers from './PointLayers';
 
 let current = [];
 let mode = 0;
 
-const Map = ({points, setPoints, lines, setLines, areas, setAreas, showSidebar, tempMarks, setTempMarks}) => {
+const Map = ({points, setPoints, lines, setLines, areas, setAreas, showSidebar, tempMarks, setTempMarks, activeGid, setActiveGid, setGids}) => {
 
     const origin = points.length ? points[points.length - 1].coordinates : [77.516233, 28.494164];  
 
@@ -44,7 +45,6 @@ const Map = ({points, setPoints, lines, setLines, areas, setAreas, showSidebar, 
     const [beaconDist, setBeaconDist] = useState(null);
     const [hoverCoords, setHoverCoords] = useState([]);
     const [marks, setMarks] = useState([]);
-        
 
     const haverSine = (co1, co2) => {
         	
@@ -72,7 +72,7 @@ const Map = ({points, setPoints, lines, setLines, areas, setAreas, showSidebar, 
             let newCoord = e.lngLat;
             current = newCoord;
             setMarks([...marks, {
-                gid: 1,
+                gid: activeGid,
                 coordinates: newCoord
             }])
         }
@@ -88,13 +88,13 @@ const Map = ({points, setPoints, lines, setLines, areas, setAreas, showSidebar, 
             if (marks.length) {
                 if (mode === 0) {
                     setLines([...lines, {
-                        gid: 1,
+                        gid: activeGid,
                         points: marks
                     }])
                 } else if (mode === 1) {
                     (marks.length > 2) ? (
                         setAreas([...areas, {
-                            gid: 1,
+                            gid: activeGid,
                             points: marks
                         }])
                     ) : (
@@ -136,8 +136,9 @@ const Map = ({points, setPoints, lines, setLines, areas, setAreas, showSidebar, 
                 setViewPort({...viewPort, width: "fit", height: "fit"})
             }}
             onClick={drawLine.draw ? handleMapClick : null}
-            onHover={drawLine.draw ? handleMapHover : null}>
-                <div style={{position: 'absolute', right: "15px", top: "30px"}}>
+            onHover={drawLine.draw ? handleMapHover : null}
+            minZoom={2}>
+                <div style={{position: "absolute", right: "15px", top: "30px"}}>
                     <NavigationControl />
                 </div>
                 <div style={{position: "absolute", top: "135px", right: "15px"}}>
@@ -153,15 +154,15 @@ const Map = ({points, setPoints, lines, setLines, areas, setAreas, showSidebar, 
                     />
                 </div>
 
-                <Points points={points} setPoints={setPoints} type={""} />
+                <Points points={points} setPoints={setPoints} type={""} activeGid={activeGid} />
                 {marks.length ? (
                     <Points points={marks} setPoints={setMarks} type={"temp"} />
                 ) : (null)}
                 {tempMarks.length ? (
                     <Points points={tempMarks} setPoints={setTempMarks} type={"temp"} />
                 ) : (null)}
-                <Lines lines={lines} setLines={setLines} />
-                <Areas areas={areas} setAreas={setAreas} />
+                <Lines lines={lines} setLines={setLines} activeGid={activeGid} />
+                <Areas areas={areas} setAreas={setAreas} activeGid={activeGid} />
 
                 <button className="custom" id="point" title="Add a point" onClick={() => {
                     if (drawLine.draw) {
@@ -183,7 +184,7 @@ const Map = ({points, setPoints, lines, setLines, areas, setAreas, showSidebar, 
                         current = [];
                         setBeaconDist(null);
                         setLines([...lines, {
-                            gid: 1,
+                            gid: activeGid,
                             points: marks
                         }]);
                         setMarks([]);
@@ -200,7 +201,7 @@ const Map = ({points, setPoints, lines, setLines, areas, setAreas, showSidebar, 
                         mode = 0;
                         setBeaconDist(null);
                         setAreas([...areas, {
-                            gid: 1,
+                            gid: activeGid,
                             points: marks
                         }]);
                         setMarks([]);
@@ -219,6 +220,10 @@ const Map = ({points, setPoints, lines, setLines, areas, setAreas, showSidebar, 
                 ) : (null)}
                
                 {showLayers ? (
+                    <PointLayers points={points} activeGid={activeGid} />
+                ) : (null)}
+
+                {showLayers ? (
                     <LineLayers lines={lines} />
                 ) : (null)}
 
@@ -227,11 +232,11 @@ const Map = ({points, setPoints, lines, setLines, areas, setAreas, showSidebar, 
                 ) : (null)}
 
                 {showMeasures ? (
-                    <Measures entities={lines} type={"lines"}/>
+                    <Measures entities={lines} type={"lines"} activeGid={activeGid} />
                 ) : (null)}
 
                 {showMeasures ? (
-                    <Measures entities={areas} type={"areas"}/>
+                    <Measures entities={areas} type={"areas"} activeGid={activeGid} />
                 ) : (null)}
 
                 <button className="blank" id="measure" title={showMeasures ? "Hide measures" : "Show measures"} onClick={() => {
@@ -245,16 +250,16 @@ const Map = ({points, setPoints, lines, setLines, areas, setAreas, showSidebar, 
                     if (lines.length || areas.length) toggleShowLayers(!showLayers)
                     else toggleShowLayers(false)
                     }}>
-                    <img src={layerIcon} alt="Layer" width="26px"></img>
+                    <img src={layerIcon} alt="Layer" width="24px"></img>
                 </button>
                 
                 {showSatMap ? (
                     <button className="blank" id="toggle" title="Regular View" onClick={() => {toggleShowSatMap(!showSatMap)}}>
-                        <img src={mapIcon} alt="mapicon" width="30px"></img>
+                        <img src={mapIcon} alt="mapicon" width="24px"></img>
                     </button>
                 ) : (
                     <button className="blank" id="toggle" title="Satellite View" onClick={() => {toggleShowSatMap(!showSatMap)}}>
-                        <img src={earthIcon} alt="sat" width="30px"></img>
+                        <img src={earthIcon} alt="sat" width="24px"></img>
                     </button>
                 )}
 
@@ -265,6 +270,8 @@ const Map = ({points, setPoints, lines, setLines, areas, setAreas, showSidebar, 
                         setPoints([]);
                         setLines([]);
                         setAreas([]);
+                        setActiveGid("Group 1");
+                        setGids(["Group 1"]);
                         current = [];
                         setBeaconDist(null);
                     }

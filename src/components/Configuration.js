@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import closeIcon from '../graphics/close.svg';
 
 
@@ -6,6 +7,7 @@ import closeIcon from '../graphics/close.svg';
 const Configuration = ({showConfig, toggleShowConfig, points, lines, areas, setPoints, setLines, setAreas}) => {
 
     const [showConfirm, toggleShowConfirm] = useState(false);
+    const [showOptions, toggleShowOptions] = useState(false);
 
     const popFunction = (arr) => {
         let newArr = [...arr];
@@ -62,6 +64,46 @@ const Configuration = ({showConfig, toggleShowConfig, points, lines, areas, setP
         
     };
 
+    const handleEnter = async (e) => {
+        if (e.key === "Enter" && document.getElementById("db-geojson").innerText) {
+            e.preventDefault();
+            const syn = document.getElementById("db-geojson").innerText;
+            const ind = syn.search("@");
+            if (ind === -1) {
+                return ;
+            } 
+            const email = syn.slice(0, ind) + "@nawgati.com";
+            const password = syn.slice(ind + 1);
+            const body = {email, password};
+            try {
+                const res = await fetch("http:localhost:8081/login", { 
+                    method: 'POST', 
+                    body: JSON.stringify(body),
+                    headers: {'Content-Type': 'application/json'},
+                    credentials: "include"
+                });
+                console.log(res);
+                
+                if (res.status === 201) {
+                    try {
+                        const stations = await axios.get("http:localhost:8081/stations/all");
+                        if (stations) console.log(stations);
+                    } catch (err) {
+                        console.log(err);
+                    }
+                    
+                }
+                
+            } catch (error) {
+            console.log(error);
+            }
+        }
+    };
+
+    useEffect(() => {
+        document.getElementById("db-geojson").addEventListener("keydown", handleEnter);
+    });
+
     useEffect(() => {
         if (showConfirm) {
             setTimeout(() => {
@@ -87,21 +129,20 @@ const Configuration = ({showConfig, toggleShowConfig, points, lines, areas, setP
                     </button>
                 </div>
                 <p style={{color: "rgb(17, 187, 31)", fontSize: "12px", marginTop: "5px"}}><i>Paste a valid Nawgati configuration url</i></p>
-            
-                <div style={{display: "flex"}}>
-                    <button className="rounded" id="copy" title="Overwrite and Insert" onClick={() => {
-                        let txt = document.getElementById("db-geojson").innerText;
-                        if (txt) {
-                            try {
-                                let geojson = JSON.parse(txt);
-                                toState(geojson, 1);
-                            } catch (error) {
-                                alert("Invalid JSON in input field!");
-                            }
-                        }
-                        
-                    }}>Insert</button>
+                <div style={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
+                    <div contentEditable="true" className="editable" id="db-geojson" style={{width: "208px"}}
+                    onFocus={() => {
+                        navigator.clipboard.readText().then((clipText) => {
+                            document.getElementById("db-geojson").innerText = clipText;
+                        })
+                    }}>
+
+                    </div>
+                    <p style={{marginTop: "5px"}}>.nawgati.com</p>
                 </div>
+                {showOptions ? (
+                    <p style={{color: "rgb(17, 187, 31)", fontSize: "14px", marginTop: "5px"}}><i>Successfully logged in</i></p>
+                ) : (null)}
             </div>
         </div>
     )

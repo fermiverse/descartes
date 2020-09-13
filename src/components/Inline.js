@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const Inline = ({points, setPoints, lines, setLines, areas, setAreas, toggleShowInline}) => {
+const Inline = ({points, setPoints, lines, setLines, areas, setAreas, toggleShowInline, activeGid, gids, setGids}) => {
 
     const popFunction = (arr) => {
         let newArr = [...arr];
@@ -9,7 +9,24 @@ const Inline = ({points, setPoints, lines, setLines, areas, setAreas, toggleShow
         return newArr
     };
 
+    const elemCount = (points, lines, areas) => {
+        let count = 0;
+        count += points.length;
+        for (const line of lines) count += line.geometry.coordinates.length;
+        for (const area of areas) count += area.geometry.coordinates.length;
+        return count;
+    };
+
+    const rand = (guess) => {
+        if (gids.includes(guess)) {
+            const res = +guess.replace("Group ", "");
+            return rand("Group " + (res + 1));
+        } else return guess;
+    };
+
     const toState = (geojson, mode) => {
+        let newGid = "Group " + (gids.length + 1);
+        newGid = rand(newGid);
         try {
             let features = geojson.features;
 
@@ -21,35 +38,42 @@ const Inline = ({points, setPoints, lines, setLines, areas, setAreas, toggleShow
                 coordinates: geoArea.geometry.coordinates[0]
             }}));
 
+            if (elemCount(geoPoints, geoLines, geoAreas) > 1000) {
+                alert("Warning: Heavy dataset loaded. This will be rendered as static geoJSON in a separate group.");
+                mode = 1;
+            }
+
             let newPoints = geoPoints.map(item => ({
-                gid: 1,
+                properties: item.properties ? item.properties : {},
+                gid: mode ? newGid : activeGid,
                 coordinates: item.geometry.coordinates
             }));
+
             let newLines = geoLines.map(item => ({
-                gid: 1,
+                properties: item.properties ? item.properties : {},
+                gid: mode ? newGid : activeGid,
                 points: item.geometry.coordinates.map(coord => ({
-                    gid: 1,
+                    gid: mode ? newGid : activeGid,
                     coordinates: coord
                 }))
             }));
             
             let newAreas = geoAreas.map(item => ({
-                gid: 1,
+                properties: item.properties ? item.properties : {},
+                gid: mode ? newGid : activeGid,
                 points: popFunction(item.geometry.coordinates.map(coord => ({
-                    gid: 1,
+                    gid: mode ? newGid : activeGid,
                     coordinates: coord
                 })))
             }));
 
             if (mode) {
-                setPoints(newPoints);
-                setLines(newLines);
-                setAreas(newAreas);
-            } else {
-                setPoints([...points, ...newPoints]);
-                setLines([...lines, ...newLines]);
-                setAreas([...areas, ...newAreas]);
+                setGids([...gids, newGid]);
             }
+            
+            setPoints([...points, ...newPoints]);
+            setLines([...lines, ...newLines]);
+            setAreas([...areas, ...newAreas]);
             toggleShowConfirm(true);
 
         } catch (error) {
@@ -58,40 +82,18 @@ const Inline = ({points, setPoints, lines, setLines, areas, setAreas, toggleShow
         
     };
 
-    const handleEnter = (e) => {
-        if (e.key === "Enter" && document.getElementById("in-geojson").innerText) {
-            e.preventDefault();
-            try {
-                axios.get(document.getElementById("in-geojson").innerText).then((res) => {
-                    let data = res.data;
-                    if (Array.isArray(data)) {
-                        data.forEach(item => toState(item, 0));
-                    } else {
-                        toState(data, 0);
-                    }
-                })
-              } catch (error) {
-                console.log("GET failed with error", error);
-              }
-        }
-    };
-
     const [showConfirm, toggleShowConfirm] = useState(false);
-
-    useEffect(() => {
-        document.getElementById("in-geojson").addEventListener("keydown", handleEnter);
-    });
 
     useEffect(() => {
         if (showConfirm) {
             setTimeout(() => {
                 toggleShowConfirm(false)
-            }, 5000);
+            }, 3000);
             setTimeout(() => {
                 toggleShowInline(false)
-            }, 2500);
+            }, 5000);
         }
-    }, [showConfirm]);
+    }, [showConfirm, toggleShowInline]);
 
     /*useEffect(() => {
         document.getElementById("in-geojson").addEventListener("paste", e => {
@@ -113,18 +115,7 @@ const Inline = ({points, setPoints, lines, setLines, areas, setAreas, toggleShow
                     geoJSON accepted
                 </p>
             ) : (null)}
-            <div contentEditable="true" id="in-geojson" style={{outline: "none", minHeight: "20px", 
-            backgroundColor: "rgb(170, 170, 170)",
-            color: "blue", 
-            marginTop: "10px",
-            padding: "13px", 
-            paddingTop: "8px",
-            paddingBottom: "8px",
-            border: "none",
-            borderRadius: "20px", 
-            maxHeight: "50px",  
-            width: "294px", 
-            whiteSpace: "nowrap", overflowX: "hidden"}} 
+            <div contentEditable="true" className="editable" id="in-geojson" 
             onFocus={() => {
                 navigator.clipboard.readText().then((clipText) => {
                     document.getElementById("in-geojson").innerText = clipText;
@@ -132,34 +123,25 @@ const Inline = ({points, setPoints, lines, setLines, areas, setAreas, toggleShow
             }}>
             </div>
             <div style={{display: "flex"}}>
-                <button className="rounded" title="Overwrite and Insert" onClick={() => {
+                <button className="rounded" title="Insert to new group" onClick={() => {
                     try {
                         axios.get(document.getElementById("in-geojson").innerText).then((res) => {
                             let data = res.data;
-                            if (Array.isArray(data)) {
-                                data.forEach(item => toState(item, 0));
-                            } else {
-                                toState(data, 1);
-                            }
+                            toState(data, 1);
                         })
                       } catch (error) {
                         console.log("GET failed with error", error);
                       }
                 }}>Insert</button>
-                <button className="rounded" id="append" style={{marginLeft: "10px"}} title="Append" onClick={() => {
+                <button className="rounded" id="append" style={{marginLeft: "10px"}} title="Append to active group" onClick={() => {
                     try {
                         axios.get(document.getElementById("in-geojson").innerText).then((res) => {
                             let data = res.data;
-                            console.log(data);
-                            if (Array.isArray(data)) {
-                                data.forEach(item => toState(item, 0));
-                            } else {
-                                toState(data, 0);
-                            }
+                            toState(data, 0);
                         })
-                      } catch (error) {
-                        console.log("GET failed with error", error);
-                      }
+                    } catch (error) {
+                    console.log("GET failed with error", error);
+                    }
                 }}>Append</button>
                 <button className="rounded" id="dReset" title="Clear input" style={{marginLeft: "10px"}} onClick={() => {
                     document.getElementById("in-geojson").innerText = "";

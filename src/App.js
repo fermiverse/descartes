@@ -6,7 +6,7 @@ import Landing from './components/Landing';
 import SnapMenu from './components/SnapMenu';
 import Menu from './graphics/menu.svg';
 import Input from './components/Input';
-import Configuration from './components/Configuration';
+
 
 
 const App = () => {
@@ -25,56 +25,58 @@ const App = () => {
     const item = {
       points: points, 
       lines: lines,
-      areas: areas
+      areas: areas,
+      gids: gids,
+      activeGid: activeGid
     };
     localStorage.setItem("sessionData", JSON.stringify(item));
     sessionStorage.setItem("showLanding", JSON.stringify(showLanding));
-  }
+  };
 
   useEffect(() => {
     window.addEventListener("beforeunload", onUnloadSave);
   });
 
   const defaultCentre = {
-    gid: 1,
+    gid: "Group 1",
     coordinates: [77.516233, 28.494164]
   };
 
   const defaultLine = {
-    gid: 1,
+    gid: "Group 1",
     points: [
       {
-        gid: 1,
+        gid: "Group 1",
         coordinates: [77.536233, 28.494164]
       },
       {
-        gid: 1,
+        gid: "Group 1",
         coordinates: [77.556233, 28.494164]
       },
       {
-        gid: 1,
+        gid: "Group 1",
         coordinates: [77.546233, 28.492164]
       }
     ]
   };
 
   const defaultArea = {
-    gid: 1,
+    gid: "Group 1",
     points: [
       {
-        gid: 1,
+        gid: "Group 1",
         coordinates: [77.53133700, 28.50721867]
       },
       {
-        gid: 1,
+        gid: "Group 1",
         coordinates: [77.53786711, 28.50213750]
       },
       {
-        gid: 1,
+        gid: "Group 1",
         coordinates: [77.53892413, 28.51272691]
       },
       {
-        gid: 1,
+        gid: "Group 1",
         coordinates: [77.53150213, 28.51518115]
       } 
     ]
@@ -85,13 +87,14 @@ const App = () => {
   const [areas, setAreas] = useState((init && init.areas) ? init.areas : [defaultArea]);
   const [showOutput, toggleShowOutput] = useState(false);
   const [showInput, toggleShowInput] = useState(false);
-  const [showConfig, toggleShowConfig] = useState(false);
   const [showSidebar, toggleShowSidebar] = useState(window.innerWidth > 1000 ? true : false);
   const landing = JSON.parse(localStorage.getItem("showLanding")) === false ? false
   : (JSON.parse(sessionStorage.getItem("showLanding")) === null || JSON.parse(sessionStorage.getItem("showLanding")) === true) ? true : false;
   const [showLanding, toggleShowLanding] = useState(landing);
   const [showSnap, toggleShowSnap] = useState(false);
   const [tempMarks, setTempMarks] = useState([]);
+  const [activeGid, setActiveGid] = useState((init && init.activeGid) ? init.activeGid : "Group 1");
+  const [gids, setGids] = useState((init && init.gids) ? init.gids : ["Group 1"]);
 
   return (
     <div className="App" style={style}>
@@ -102,7 +105,7 @@ const App = () => {
         (window.innerWidth > 1000) ? (
           <div id="title">
             <div>
-                <h1>descartes v1.3</h1>
+                <h1>descartes v2.0</h1>
             </div>
             <div style={{display: "flex", alignItems: "center", float: "right"}}>
                 <button className="collapse" title={showSidebar ? "collapse" : "expand"} onClick={() => {toggleShowSidebar(!showSidebar)}}><img src={Menu} alt="Menu" width="12px"></img></button>
@@ -118,7 +121,8 @@ const App = () => {
       lines={lines} setLines={setLines} 
       areas={areas} setAreas={setAreas}
       showSidebar={showSidebar} 
-      tempMarks={tempMarks} setTempMarks={setTempMarks} />
+      tempMarks={tempMarks} setTempMarks={setTempMarks}
+      activeGid={activeGid} setActiveGid={setActiveGid} setGids={setGids} />
       {showSidebar ? (
         <Sidebar 
         points={points} setPoints={setPoints}
@@ -127,26 +131,25 @@ const App = () => {
         toggleShowInput={toggleShowInput} toggleShowOutput={toggleShowOutput} 
         showSidebar={showSidebar} toggleShowSidebar={toggleShowSidebar}
         showSnap={showSnap} toggleShowSnap={toggleShowSnap} 
-        showConfig={showConfig} toggleShowConfig={toggleShowConfig} />
+        activeGid={activeGid} setActiveGid={setActiveGid} 
+        gids={gids} setGids={setGids} />
       ) : (null)}
       {showSnap ? (
-        <SnapMenu lines={lines} setLines={setLines} showSnap={showSnap} toggleShowSnap={toggleShowSnap} tempMarks={tempMarks} setTempMarks={setTempMarks} />
+        <SnapMenu lines={lines} setLines={setLines} 
+        showSnap={showSnap} toggleShowSnap={toggleShowSnap} 
+        tempMarks={tempMarks} setTempMarks={setTempMarks} activeGid={activeGid} />
       ) : (null)}
       {showOutput ? (
-        <Output showOutput={showOutput} toggleShowOutput={toggleShowOutput} points={points} lines={lines} areas={areas} />
+        <Output showOutput={showOutput} toggleShowOutput={toggleShowOutput} 
+        points={points} lines={lines} areas={areas} 
+        gids={gids} activeGid={activeGid} />
       ) : (null)}
       {showInput ? (
         <Input showInput={showInput} toggleShowInput={toggleShowInput} 
         points={points} setPoints={setPoints}
         lines={lines} setLines={setLines}
-        areas={areas} setAreas={setAreas} />
-      ) : (null)}
-      {showConfig ? (
-        <Configuration 
-        showConfig={showConfig} toggleShowConfig={toggleShowConfig} 
-        points={points} setPoints={setPoints}
-        lines={lines} setLines={setLines}
-        areas={areas} setAreas={setAreas} />
+        areas={areas} setAreas={setAreas} 
+        activeGid={activeGid} gids={gids} setGids={setGids} />
       ) : (null)}
     </div>
   )
