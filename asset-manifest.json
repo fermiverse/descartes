@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/descartes/static/css/main.13fdd09f.chunk.css",
-    "main.js": "/descartes/static/js/main.d1b13717.chunk.js",
-    "main.js.map": "/descartes/static/js/main.d1b13717.chunk.js.map",
+    "main.js": "/descartes/static/js/main.7c740c03.chunk.js",
+    "main.js.map": "/descartes/static/js/main.7c740c03.chunk.js.map",
     "runtime-main.js": "/descartes/static/js/runtime-main.9f3e12f4.js",
     "runtime-main.js.map": "/descartes/static/js/runtime-main.9f3e12f4.js.map",
-    "static/js/2.d5dad4b4.chunk.js": "/descartes/static/js/2.d5dad4b4.chunk.js",
-    "static/js/2.d5dad4b4.chunk.js.map": "/descartes/static/js/2.d5dad4b4.chunk.js.map",
+    "static/js/2.fc07bc4b.chunk.js": "/descartes/static/js/2.fc07bc4b.chunk.js",
+    "static/js/2.fc07bc4b.chunk.js.map": "/descartes/static/js/2.fc07bc4b.chunk.js.map",
     "index.html": "/descartes/index.html",
-    "precache-manifest.1733abe7dff4d2608d34e4f2889dd024.js": "/descartes/precache-manifest.1733abe7dff4d2608d34e4f2889dd024.js",
+    "precache-manifest.8133c1c04b7dca56c9090ec4578e69b4.js": "/descartes/precache-manifest.8133c1c04b7dca56c9090ec4578e69b4.js",
     "service-worker.js": "/descartes/service-worker.js",
     "static/css/main.13fdd09f.chunk.css.map": "/descartes/static/css/main.13fdd09f.chunk.css.map",
-    "static/js/2.d5dad4b4.chunk.js.LICENSE.txt": "/descartes/static/js/2.d5dad4b4.chunk.js.LICENSE.txt",
+    "static/js/2.fc07bc4b.chunk.js.LICENSE.txt": "/descartes/static/js/2.fc07bc4b.chunk.js.LICENSE.txt",
     "static/media/area.svg": "/descartes/static/media/area.0574f801.svg",
     "static/media/close.svg": "/descartes/static/media/close.8b20cee7.svg",
     "static/media/descartes_big.svg": "/descartes/static/media/descartes_big.8c90f56f.svg",
@@ -35,8 +35,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.9f3e12f4.js",
-    "static/js/2.d5dad4b4.chunk.js",
+    "static/js/2.fc07bc4b.chunk.js",
     "static/css/main.13fdd09f.chunk.css",
-    "static/js/main.d1b13717.chunk.js"
+    "static/js/main.7c740c03.chunk.js"
   ]
 }
