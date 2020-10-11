@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "846b212ba5603dd77665254145f71654",
+    "revision": "6e8898199a9a50f21c76562b3a1920b4",
     "url": "/descartes/index.html"
   },
   {
-    "revision": "9e370b6e79007714118a",
+    "revision": "b5dd5b12c9ae39a08ee3",
     "url": "/descartes/static/css/main.13fdd09f.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/descartes/static/js/2.fc07bc4b.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "9e370b6e79007714118a",
-    "url": "/descartes/static/js/main.7c740c03.chunk.js"
+    "revision": "b5dd5b12c9ae39a08ee3",
+    "url": "/descartes/static/js/main.57e9cb45.chunk.js"
   },
   {
     "revision": "715bf0adcee96bbde5b4",
