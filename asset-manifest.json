@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/descartes/static/css/main.13fdd09f.chunk.css",
-    "main.js": "/descartes/static/js/main.0af84c72.chunk.js",
-    "main.js.map": "/descartes/static/js/main.0af84c72.chunk.js.map",
+    "main.js": "/descartes/static/js/main.0c915fad.chunk.js",
+    "main.js.map": "/descartes/static/js/main.0c915fad.chunk.js.map",
     "runtime-main.js": "/descartes/static/js/runtime-main.9f3e12f4.js",
     "runtime-main.js.map": "/descartes/static/js/runtime-main.9f3e12f4.js.map",
-    "static/js/2.fc07bc4b.chunk.js": "/descartes/static/js/2.fc07bc4b.chunk.js",
-    "static/js/2.fc07bc4b.chunk.js.map": "/descartes/static/js/2.fc07bc4b.chunk.js.map",
+    "static/js/2.c52e3f7e.chunk.js": "/descartes/static/js/2.c52e3f7e.chunk.js",
+    "static/js/2.c52e3f7e.chunk.js.map": "/descartes/static/js/2.c52e3f7e.chunk.js.map",
     "index.html": "/descartes/index.html",
-    "precache-manifest.2d00a1fc429a6dd4ff679ac6d7d5fc93.js": "/descartes/precache-manifest.2d00a1fc429a6dd4ff679ac6d7d5fc93.js",
+    "precache-manifest.eda9537d2643798c5efd7e1a04454e97.js": "/descartes/precache-manifest.eda9537d2643798c5efd7e1a04454e97.js",
     "service-worker.js": "/descartes/service-worker.js",
     "static/css/main.13fdd09f.chunk.css.map": "/descartes/static/css/main.13fdd09f.chunk.css.map",
-    "static/js/2.fc07bc4b.chunk.js.LICENSE.txt": "/descartes/static/js/2.fc07bc4b.chunk.js.LICENSE.txt",
+    "static/js/2.c52e3f7e.chunk.js.LICENSE.txt": "/descartes/static/js/2.c52e3f7e.chunk.js.LICENSE.txt",
     "static/media/area.svg": "/descartes/static/media/area.0574f801.svg",
     "static/media/close.svg": "/descartes/static/media/close.8b20cee7.svg",
     "static/media/descartes_big.svg": "/descartes/static/media/descartes_big.8c90f56f.svg",
@@ -35,8 +35,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.9f3e12f4.js",
-    "static/js/2.fc07bc4b.chunk.js",
+    "static/js/2.c52e3f7e.chunk.js",
     "static/css/main.13fdd09f.chunk.css",
-    "static/js/main.0af84c72.chunk.js"
+    "static/js/main.0c915fad.chunk.js"
   ]
 }
