@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "6f7924e1b0717d8fba2d8dd1338d6db7",
+    "revision": "a27a5c78fef442f4de8db85965e1e50f",
     "url": "/descartes/index.html"
   },
   {
-    "revision": "b12ab8720d90391e42dd",
-    "url": "/descartes/static/css/main.e028540f.chunk.css"
+    "revision": "c8d02bcbc743ed8388b2",
+    "url": "/descartes/static/css/main.39d508e3.chunk.css"
   },
   {
-    "revision": "bb09d26edae6b82ce94d",
-    "url": "/descartes/static/js/2.ee51fdbe.chunk.js"
+    "revision": "16c41322136c9ffc53ee",
+    "url": "/descartes/static/js/2.2be8ff8a.chunk.js"
   },
   {
     "revision": "0fb0e672f1308cb5b7677cdb93fc42ab",
-    "url": "/descartes/static/js/2.ee51fdbe.chunk.js.LICENSE.txt"
+    "url": "/descartes/static/js/2.2be8ff8a.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "b12ab8720d90391e42dd",
-    "url": "/descartes/static/js/main.de936255.chunk.js"
+    "revision": "c8d02bcbc743ed8388b2",
+    "url": "/descartes/static/js/main.1c086af0.chunk.js"
   },
   {
     "revision": "715bf0adcee96bbde5b4",
@@ -32,8 +32,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/descartes/static/media/close.8b20cee7.svg"
   },
   {
-    "revision": "8c90f56ff0c66df569afb6150c566bcc",
-    "url": "/descartes/static/media/descartes_big.8c90f56f.svg"
+    "revision": "1d64105c5f37262b7a6894dd23e1725f",
+    "url": "/descartes/static/media/descartes_mod.1d64105c.svg"
   },
   {
     "revision": "11093ee16c26a61acb6c3c1637e50ec7",
@@ -92,8 +92,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/descartes/static/media/pencil.bdced74c.svg"
   },
   {
-    "revision": "ad839e81cbb01e3c1a3f46e98d247029",
-    "url": "/descartes/static/media/plogo.ad839e81.svg"
+    "revision": "06a2d97797ca291a74f55a17c83d4f58",
+    "url": "/descartes/static/media/plogo.06a2d977.svg"
   },
   {
     "revision": "5f83c8124cb4ed514445837bb383494c",
